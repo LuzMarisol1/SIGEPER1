@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <!--Tabla editar alumnos-->
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -24,7 +25,7 @@
             </span>
         </a>
     </header>
-    <div id="tablaA">
+    <div id="tablaA" data-search="true" data-filter-control="true"  >
         <div class="container">
             <table class="table"id="infoEstudiantes">
                 <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
@@ -44,14 +45,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>Luz Marisol Falfán Hernández</td>
+                        <td>zS17015187</td>
+                        <td>Continuidad</td>
+                        <td>Dr. Luis Jerardo Montané Jimenez</td>
+                        <td>Generación de un Kardex Academico para el centro de Autoacceso (CAA)</td>
+                        <td>Trabajo recepcional</td>
+                        <td>Jose Guillermo Hernández Calderón</td>
+                        <td>Concluido</td>
                         <td>
                             <button id="editar" type="button" class="btn btn-primary btn-xs jsdt-edit"
                                 style="margin-right:16px;" onclick="abrirModal()"> Editar
@@ -60,6 +61,19 @@
                         </td>
                     </tr>
                 </tbody>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </nav>
             </table>
 
             <div id="modal" class="modal" tabindex="2" role="dialog">
@@ -77,8 +91,9 @@
                                     <select id="inscripcion" name="inscripcion" class="form-select form-select-sm"
                                         aria-label=".form-select-sm example">
                                         <option value="">Seleccionar</option>
-                                        <option value="1">1234567</option>
-                                        <option value="2">7654321</option>
+                                        <option value="1">Primera </option>
+                                        <option value="2">Continuidad</option>
+                                        <option value="2">Segunda</option>
                                     </select>
                                 </div>
                                 <br>
@@ -108,6 +123,7 @@
                                     <button type="button"
                                         class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
                                 </div>
+                                
                             </form>
                         </div>
                     </div>
