@@ -76,7 +76,7 @@
                 </nav>
             </table>
 
-            <div id="modal" class="modal" tabindex="2" role="dialog">
+            <div id="modal" class="modal" tabindex="1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -101,6 +101,15 @@
                                     <label for="proyecto"><b>Proyecto:</b></label>
                                     <input type="text" id="proyecto" class="form-control" name="proyecto"
                                         placeholder="Nombre del proyecto">
+                                </div>
+                                <div class="select-container">
+                                    <label for="estatus"><b>Modalidad:</b></label>
+                                    <select id="estatus" name="estatus" class="form-select form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        <option value="pendiente">Proyecto</option>
+                                        <option value="proceso">Examen</option>
+                                        <option value="terminado">Ceneval</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="director"><b>Director:</b></label>
