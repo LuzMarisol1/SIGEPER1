@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('idTcUsuario');
             $table->string('descripcion', 255);
             $table->charset = 'utf8mb4'; // Establecer el conjunto de caracteres
-            $table->collation = 'utf8mb4_unicode_ci'; // Establecer la intercalación
+            $table->collation = 'utf8mb4_unicode_ci'; 
         });
     }
 

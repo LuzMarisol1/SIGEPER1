@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('TcInscripcion', function (Blueprint $table) {
             $table->increments('idTcInscripcion');
             $table->string('descripcion', 255);
-            $table->timestamps(); // Agregar timestamps si es necesario
+            $table->timestamps(); // Agregar timestamps 
             $table->engine = 'InnoDB'; // Establecer el motor de almacenamiento
             $table->charset = 'utf8mb4'; // Establecer el conjunto de caracteres
             $table->collation = 'utf8mb4_unicode_ci'; // Establecer la intercalación

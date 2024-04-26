@@ -11,11 +11,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-
     <link href="css/tablas.css" rel="stylesheet" />
     <script type="text/javascript" src="js/tablaAlumnos.js"></script>
     <title>Proyectos de Experiencia Recepcional</title>
@@ -29,10 +27,12 @@
             </span>
         </a>
     </header>
+    
     <div id="tablaA" data-search="true" data-filter-control="true">
         <div class="container">
             <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
             <h3 style="text-align: center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
+            
             <table id="tabAlumnos" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -49,22 +49,20 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Alphabet puzzle</td>
-                        <td>2016/01/15</td>
-                        <td>Done</td>
-                        <td>Amount</td>
-                        <td>Amount</td>
-                        <td>Amount</td>
-                        <td>Amount</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
                         <button type="button" class="btn btn-primary btn-xs dt-edit" onclick="abrirModal()"
                             style="margin-right:16px;">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         </button>
-                        <button type="button" class="btn btn-danger btn-xs dt-delete">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
+                        
                     </td>
                 </tr>
                 </tbody>
@@ -82,7 +80,7 @@
                     </li>
                 </ul>
             </nav>
-            <div id="modal" class="modal" tabindex="1" role="dialog">
+            <div id="mODAL" class="modal" tabindex="1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

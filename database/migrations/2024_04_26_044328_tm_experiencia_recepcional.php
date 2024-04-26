@@ -21,8 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('idTcModalidad');
             $table->string('director', 255);
             $table->unsignedInteger('idTcEstatus');
-            $table->timestamps(); // Si deseas agregar timestamps
-
+            $table->timestamps(); 
             $table->foreign('idTcInscripcion')
                   ->references('idTcInscripcion')
                   ->on('TcInscripcion')
