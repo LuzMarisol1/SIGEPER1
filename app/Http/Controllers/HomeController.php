@@ -35,5 +35,7 @@ class HomeController extends Controller
     public function actualizarD(Request $request){
         $arrayReturn = ["res" =>0, "msg" => ""];
 
+        
+
     }
 }

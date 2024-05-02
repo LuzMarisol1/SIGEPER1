@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
+    return view('tablaAlumnos');
+});*/
+
+Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+/*Route::get('/', function () {
     return view('tablaAlumnos');
 });
+Route::get('/registro', [RegistroController::class], 'create');
+Route::post('registro', [RegistroController::class], 'store');*/
