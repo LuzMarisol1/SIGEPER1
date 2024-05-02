@@ -103,13 +103,14 @@
                                     <label class="form-label">Tipo de inscripción</label>
                                     <select id="selectTipoInscripcion" class="form-select "
                                         aria-label="Default select example">
+                                        <option selected>Seleccionar</option>
                                         <option value="1">Primera Inscripción</option>
                                         <option value="2">Continudad</option>
                                         <option value="3">Segunda Inscripción</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tituloProyecto" class="form-label">Proyecto</label>
+                                    <label for="tituloProyecto" class="campoTitulo">Proyecto</label>
                                     <input id="tituloProyecto" type="text" class="form-control">
                                 </div>
                                 <div class="mb-3">
