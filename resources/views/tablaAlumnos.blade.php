@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<!--Tabla editar alumnos-->
 
 <head>
     <meta charset="utf-8" />
@@ -8,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
     <!--CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -23,17 +21,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <!--PERSONALIZADO-->
-    <link href="css/tablas.css" rel="stylesheet"/>
-    <link href="css/styles.css" rel="stylesheet"/>
+    <link href="css/tablas.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
     <script type="text/javascript" src="js/editEstudiantes.js"></script>
-
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
 
 <body>
+    
     <header id="main-header">
         <a id="logo-header">
             <span class="site-name">
@@ -41,7 +36,6 @@
             </span>
         </a>
     </header>
-
     <div id="tablaA" data-search="true" data-filter-control="true">
         <div class="container">
             <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
@@ -78,7 +72,7 @@
                     </tr>
                 </tbody>
             </table>
-        
+
             <div id="mODAL" class="modal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
