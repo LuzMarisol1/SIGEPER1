@@ -7,18 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <!--CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymou">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- SweetAlert2-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!--PERSONALIZADO-->
     <link href="css/tablas.css" rel="stylesheet" />
     
-    <script type="text/javascript" src="js/tablaAlumnos.js"></script>
+    <script type="text/javascript" src="js/editEstudiantes.js"></script>
 
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
@@ -64,7 +66,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button type="button" title="Abrir un modal con más información" id="btnEditar" class="btn btn-primary btn-xs dt-edit"
+                            <button  id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
                                 style="margin-right:16px;">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>
@@ -92,8 +94,6 @@
                         <div class="modal-header">
                             <h5 class="modal-title">
                                 <h3>Editar datos</h3>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close">Cancelar</button>
                         </div>
                         <div class="modal-body">
                             <form id="formEditar">
@@ -130,7 +130,7 @@
                                 <button id="guardarDatos"type="button" class="btn btn-primary"
                                     onclick="actualizarDatos()">Guardar</button>
                                 <button type="button"
-                                    class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
+                                    class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
 
