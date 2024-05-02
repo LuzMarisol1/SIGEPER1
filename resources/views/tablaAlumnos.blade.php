@@ -11,21 +11,23 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <!--CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymou">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <!-- SweetAlert2-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"></script>
     <!--PERSONALIZADO-->
     <link href="css/tablas.css" rel="stylesheet" />
-    
     <script type="text/javascript" src="js/editEstudiantes.js"></script>
 
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
 
 <body>
     <header id="main-header">
@@ -66,8 +68,8 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button  id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
-                                style="margin-right:16px;">
+                            <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
+                                style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>
 
@@ -124,22 +126,19 @@
                                     <label class="form-label">Director</label>
                                     <input id="directorP" type="text" class="form-control">
                                 </div>
-
                             </form>
+                        </div>
+                        <div class="modal-footer">
                             <div id="botonesEdit" class="modal-footer">
-                                <button id="guardarDatos"type="button" class="btn btn-primary"
-                                    onclick="actualizarDatos()">Guardar</button>
-                                <button type="button"
-                                    class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button id="guardarDatos"type="button" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
