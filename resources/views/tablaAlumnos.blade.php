@@ -36,19 +36,18 @@
             </span>
         </a>
     </header>
-    <div id="tablaA" data-search="true" data-filter-control="true">
+    <div id="divTablaalumnos" data-search="true" data-filter-control="true">
         <div class="container">
             <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
             <h3 style="text-align: center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
-            <table id="tabAlumnos" class="display" style="width:100%">
+            <table id="tablAlumnos" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Estudiante</th>
                         <th>Matrícula</th>
-                        <th>Inscripción</th>
-                        <th>Maestro ER</th>
+                        <th>Nombre estudiante</th>
+                       <!-- <th>Inscripción</th>-->
                         <th>Proyecto</th>
-                        <th>Modalidad</th>
+                        <!--<th>Modalidad</th>-->
                         <th>Director</th>
                         <th>Estatus</th>
                         <th style="text-align:center;width:100px;">Acciones</th>
@@ -57,9 +56,8 @@
                 <tbody>
                     <tr>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                       <!-- <td></td>-->
+                       <!-- <td></td>-->
                         <td></td>
                         <td></td>
                         <td></td>
@@ -73,7 +71,7 @@
                 </tbody>
             </table>
 
-            <div id="mODAL" class="modal" tabindex="-1">
+            <div id="modalEditardatos" class="modal" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
