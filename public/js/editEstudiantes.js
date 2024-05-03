@@ -1,9 +1,10 @@
 $(document).ready(function() {
     //función para abrir el modal
-    new DataTable('#tabAlumnos', {
+    new DataTable('#tablAlumnos', {
         order: [
             [3, 'desc']
         ],
+
         Buscar: {
             return: true
         },
@@ -19,7 +20,7 @@ $(document).ready(function() {
     });
 
     function abrirModal() {
-        $('#mODAL').modal('show');
+        $('#modalEditardatos').modal('show');
     }
 
     //llama a la función abrirModal()
@@ -43,13 +44,32 @@ $(document).ready(function() {
     });
 
     function actualizarDatos() {
-        let inputTitP = $("#tituloProyecto").val();
-        let inputDirector = $('#directorP').val();
-
-
+        var selectInscrip = $('#selectTipoInscripcion').val();
+        var proyecto = $('#tituloProyecto').val();
+        var selectModalidad = $('#selectModalidad').val();
+        var nomDirector = $('#directorP').val();
+        $.ajax({
+                url: '/web/actualizarInfo',
+                type: 'POST',
+                data: {
+                    selectInscrip: selectInscrip,
+                    proyecto: proyecto,
+                    selectModalidad: selectModalidad,
+                    nomDirector: nomDirector
+                },
+            })
+            .done(function(respuesta) {
+                if (respuesta["res"] == -1) {
+                    toast.error('No se ha podido actualizar');
+                    ("")
+                }
+                if (respuesta["res"] == 0) {
+                    toastr.info('Actualizado Correctamente');
+                }
+            })
     }
 
-    function actualizarDatos() {
+    /*function actualizarDatos() {
         //Obtener los valores del formulario
         var selectInscrip = $('#selectTipoInscripcion').val();
         var proyecto = $('#tituloProyecto').val();
@@ -86,7 +106,7 @@ $(document).ready(function() {
                 toastr.danger('Proceso Cancelado');
             }
         })
-    }
+    } */
     //llama a la función guardar / actualizar
     $('#guardarDatos').click(function() {
         actualizarDatos();
