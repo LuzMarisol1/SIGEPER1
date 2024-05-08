@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,8 @@ class HomeController extends Controller
     }*/
 
     public function viewTablaEstudiantes(Request $request){
-        return view('tablaAlumnos');
+        $usuarios = DB::table('usuarios')->get();
+        return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
     public function actualizarD(Request $request){
         $arrayReturn = ["res" =>0, "msg" => ""];

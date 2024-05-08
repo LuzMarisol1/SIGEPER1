@@ -20,6 +20,7 @@
     <!--DATATABLES-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/table2excel@1.0.4/dist/table2excel.min.js"></script>
     <!--PERSONALIZADO-->
     <link href="css/tablas.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -28,7 +29,7 @@
 </head>
 
 <body>
-    
+
     <header id="main-header">
         <a id="logo-header">
             <span class="site-name">
@@ -36,16 +37,18 @@
             </span>
         </a>
     </header>
+    
     <div id="divTablaalumnos" data-search="true" data-filter-control="true">
         <div class="container">
             <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
             <h3 style="text-align: center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
+            <button id="botonDocumetoExcel" class="btn btn-success">Exportar Lista</button>
             <table id="tablAlumnos" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Matrícula</th>
                         <th>Nombre estudiante</th>
-                       <!-- <th>Inscripción</th>-->
+                        <!-- <th>Inscripción</th>-->
                         <th>Proyecto</th>
                         <!--<th>Modalidad</th>-->
                         <th>Director</th>
@@ -54,20 +57,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                       <!-- <td></td>-->
-                       <!-- <td></td>-->
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td> <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
-                                style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                        </td>
-                    </tr>
+                    @foreach ($usuarios as $usuario)
+                        <tr>
+                            <td></td>
+                            <!-- <td></td>-->
+                            <!-- <td></td>-->
+                            <td>{{$usuario->nombre}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
+                                    style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
 
@@ -122,7 +127,7 @@
         </div>
     </div>
 
-    
+
 </body>
 
 </html>

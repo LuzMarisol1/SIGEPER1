@@ -43,6 +43,7 @@ $(document).ready(function() {
         }
     });
 
+
     function actualizarDatos() {
         var selectInscrip = $('#selectTipoInscripcion').val();
         var proyecto = $('#tituloProyecto').val();
