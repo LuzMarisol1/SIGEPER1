@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('TcUusuario', function (Blueprint $table){
-            $table->increments('idTcUsuario');
-            $table->string('descripcion', 255);
-            $table->charset = 'utf8mb4'; // Establecer el conjunto de caracteres
-            $table->collation = 'utf8mb4_unicode_ci'; 
+        Schema::create('catalogo_semestres', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string("periodo");
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Shema::dropIfExits('TcUsuarios');
+        Schema::dropIfExists('catalogo_semestres');
     }
 };
