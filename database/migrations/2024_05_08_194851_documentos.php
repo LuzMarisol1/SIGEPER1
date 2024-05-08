@@ -20,10 +20,9 @@ return new class extends Migration
             $table->string("estatus");
             $table->binary("archivo");
             $table->foreignId("tipo_de_documento_id")->constrained("tipo_de_documentos");
-            $table->foreignId("usuario_e_r_id")->constrained("usuario_e_r_s");
+            $table->foreignId("usuario_e_r_id")->constrained("estudiantes_e_r");
         });
     }
-
     /**
      * Reverse the migrations.
      *

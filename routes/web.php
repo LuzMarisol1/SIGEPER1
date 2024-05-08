@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+
 /*Route::get('/', function () {
     return view('tablaAlumnos');
 });

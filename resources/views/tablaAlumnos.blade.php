@@ -42,7 +42,7 @@
         <div class="container">
             <h1 style="text-align: center"> Proyectos de Experiencia Recepcional</h1>
             <h3 style="text-align: center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
-            <button id="botonDocumetoExcel" class="btn btn-success">Exportar Lista</button>
+            <button id="botonDocumetoExcel" class="btn btn-success">Importar Lista</button>
             <table id="tablAlumnos" class="display" style="width:100%">
                 <thead>
                     <tr>
@@ -59,12 +59,12 @@
                 <tbody>
                     @foreach ($usuarios as $usuario)
                         <tr>
-                            <td></td>
+                            <td>{{$usuario->matricula}}</td>
                             <!-- <td></td>-->
                             <!-- <td></td>-->
-                            <td>{{$usuario->nombre}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
+                            <td>{{$usuario->proyecto}}</td>
+                            <td>{{$usuario->director}}</td>
                             <td></td>
                             <td> <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
                                     style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
@@ -76,8 +76,8 @@
                 </tbody>
             </table>
 
-            <div id="modalEditardatos" class="modal" tabindex="-1">
-                <div class="modal-dialog">
+            <div  class="modal" tabindex="-1" id="modalEditardatos" role="dialog" aria-labelledby="modalDatosLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">
@@ -85,7 +85,11 @@
                         </div>
                         <div class="modal-body">
                             <form id="formEditar">
-                                <div id="tipoInsc" class="mb-3">
+                                <div class="mb-3">
+                                    <label for="tituloProyecto" class="campoTitulo">Nombre</label>
+                                    <input id="tituloProyecto" type="text" class="form-control">
+                                </div>
+                                <div id="tipoInscripcion" class="mb-3">
                                     <label class="form-label">Tipo de inscripción</label>
                                     <select id="selectTipoInscripcion" class="form-select "
                                         aria-label="Default select example">
@@ -111,7 +115,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Director</label>
-                                    <input id="directorP" type="text" class="form-control">
+                                    <input id="directorProyecto" type="text" class="form-control">
                                 </div>
                             </form>
                         </div>
@@ -126,8 +130,6 @@
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

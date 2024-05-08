@@ -31,7 +31,7 @@ class HomeController extends Controller
     }*/
 
     public function viewTablaEstudiantes(Request $request){
-        $usuarios = DB::table('usuarios')->get();
+        $usuarios = DB::table('estudiantes_e_r')->get();
         return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
     public function actualizarD(Request $request){
@@ -40,4 +40,6 @@ class HomeController extends Controller
         
 
     }
+    
+   
 }
