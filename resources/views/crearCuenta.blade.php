@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    <link href="css/tablas.css" rel="stylesheet" />
+    <link href="css/styles.css" href="stylesheet" />
     <script type="text/javascript" src="js/tablaAlumnos.js"></script>
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
@@ -93,7 +93,6 @@ is-invalid @enderror" name="name"
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary"> Registrar
-
                                         </button>
                                     </div>
                                 </div>

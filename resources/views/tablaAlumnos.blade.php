@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,7 +26,6 @@
     <script type="text/javascript" src="js/editEstudiantes.js"></script>
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
-
 <body>
 
     <header id="main-header">
