@@ -1,10 +1,9 @@
 $(document).ready(function() {
     //función para abrir el modal
-    new DataTable('#tablAlumnos', {
+    new DataTable('#tabAlumnos', {
         order: [
             [3, 'desc']
         ],
-
         Buscar: {
             return: true
         },
@@ -20,7 +19,7 @@ $(document).ready(function() {
     });
 
     function abrirModal() {
-        $('#modalEditardatos').modal('show');
+        $('#mODAL').modal('show');
     }
 
     //llama a la función abrirModal()
@@ -43,59 +42,14 @@ $(document).ready(function() {
         }
     });
 
-    //enlazar el modal con el ID correspondiente
-    $("#modalDatos").on('show.bs.modal', function(event) {
-
-        var button = $(event.relatedTarget);
-        var dato = button.data(('usuarios'));
-
-        //actualiza el contenido del modal
-        var modal = $(this);
-        modal.find('.modal-title').text('Nombre ' + dato.nombre);
-    });
-    /* var estudiante = @json($usuarios);
-     $('.modal').on('show.bs-modal', function(event) {
-         var button = $(event.relatedTarget);
-         var estudianteId = button.data('target').split('-')[1];
-
-         var estudiante = usuarios.find(function(p) {
-             return p.id == estudianteId;
-
-
-             //actualiza el contenido del modal
-             var modal = $(this);
-             modal.find('.modal-title').text('Nombre: ' + estudiante.nombre)
-         });
-     })
-*/
-
     function actualizarDatos() {
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-        $.ajax({
-                url: '/web/actualizarInfo',
-                type: 'POST',
-                data: {
-                    selectInscrip: selectInscrip,
-                    proyecto: proyecto,
-                    selectModalidad: selectModalidad,
-                    nomDirector: nomDirector
-                },
-            })
-            .done(function(respuesta) {
-                if (respuesta["res"] == -1) {
-                    toast.error('No se ha podido actualizar');
-                    ("")
-                }
-                if (respuesta["res"] == 0) {
-                    toastr.info('Actualizado Correctamente');
-                }
-            })
+        let inputTitP = $("#tituloProyecto").val();
+        let inputDirector = $('#directorP').val();
+
+
     }
 
-    /*function actualizarDatos() {
+    function actualizarDatos() {
         //Obtener los valores del formulario
         var selectInscrip = $('#selectTipoInscripcion').val();
         var proyecto = $('#tituloProyecto').val();
@@ -132,7 +86,7 @@ $(document).ready(function() {
                 toastr.danger('Proceso Cancelado');
             }
         })
-    } */
+    }
     //llama a la función guardar / actualizar
     $('#guardarDatos').click(function() {
         actualizarDatos();

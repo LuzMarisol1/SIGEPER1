@@ -30,16 +30,16 @@ class HomeController extends Controller
     return redirect()->route('login')->with('success', 'Cuenta creada exitosamente. Por favor, inicia sesión.');
     }*/
 
+   
     public function viewTablaEstudiantes(Request $request){
-        $usuarios = DB::table('estudiantes_e_r')->get();
+        $usuarios = DB::table('usuario_e_r_s')->get();
         return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
     public function actualizarD(Request $request){
         $arrayReturn = ["res" =>0, "msg" => ""];
-
-        
-
     }
-    
-   
+
+    public function registrarUsuario(Request $request){
+        return view('crearCuenta');
+    }
 }

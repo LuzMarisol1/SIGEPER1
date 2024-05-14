@@ -14,20 +14,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    <link href="css/styles.css" href="stylesheet" />
+    <link href="css/tablas.css" rel="stylesheet" />
     <script type="text/javascript" src="js/tablaAlumnos.js"></script>
     <title>Proyectos de Experiencia Recepcional</title>
 </head>
 
 <body>
+    @include("shared.navbar")
     @section('content')
-        <div class="container">
+        <div class="container body_content">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">{{ __('Registro') }}</div>
                         <div class="card-body">
-                            <form method="POST">
+                            <form method="POST" action="{{ route('storeUsuario') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="name"
@@ -35,9 +36,9 @@
                                     <div class="col-md-6">
                                         <input id="name" type="text"
                                             class="form-control @error('name')
-is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                        @error('name')
+                                            is-invalid @enderror" name="nombre"
+                                            value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                                        @error('nombre')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -49,9 +50,9 @@ is-invalid @enderror" name="name"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Correo electrónico') }}</label>
                                     <div class="col-md-6">
                                         <input id="email" type="email"
-                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email">
-                                        @error('email')
+                                            class="form-control @error('correo') is-invalid @enderror" name="correo"
+                                            value="{{ old('correo') }}" required autocomplete="correo">
+                                        @error('correo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -73,17 +74,35 @@ is-invalid @enderror" name="name"
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="password_confirmation"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
+                                            required>
+                                        @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="role"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
                                     <div class="col-md-6">
-                                        <select id="role" class="form-control @error('role') is-invalid @enderror"
-                                            name="role" required>
-                                            <option value="">Selecciona un rol</option>
+                                        <select id="role" class="form-control @error('rol_usuario_id') is-invalid @enderror"
+                                            name="rol_usuario_id" required>
+                                            {{-- options from $roles --}}
+                                            @foreach ($roles as $rol)
+                                                <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                            @endforeach
+                                            {{-- <option value="">Selecciona un rol</option>
                                             <option value="coordinador">Coordinador</option>
                                             <option value="maestro">Maestro</option>
-                                            <option value="alumno">Alumno</option>
+                                            <option value="alumno">Alumno</option> --}}
                                         </select>
-                                        @error('role')
+                                        @error('rol_usuario_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -93,6 +112,7 @@ is-invalid @enderror" name="name"
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary"> Registrar
+
                                         </button>
                                     </div>
                                 </div>

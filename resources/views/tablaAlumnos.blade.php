@@ -14,8 +14,7 @@
     </script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <!-- SweetAlert2-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"></script>
+    
     <!--DATATABLES-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>

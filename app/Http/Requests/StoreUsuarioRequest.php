@@ -13,7 +13,7 @@ class StoreUsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return ($this->user()->rol->nombre === "admin");
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "nombre" => ["required", "string", "max:255"],
+            "correo" => ["required", "string", "email", "max:255", "unique:usuarios"],
+            "password" => ["required", "string", "min:8", "confirmed"],
+            "rol_usuario_id" => ["required", "exists:rol_usuarios,id"]
         ];
     }
 }

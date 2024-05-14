@@ -6,7 +6,7 @@ td:last-child {
     text-align: center;
 }
 
-body {
+.body_content {
     margin: 2em;
     padding: 0;
     font-family: Helvetica, Arial, sans-serif;
@@ -32,7 +32,7 @@ h1 {
     width: 100%;
     left: 0;
     top: 0;
-    position: fixed;
+    /* position: fixed; */
 }
 
 #main-header a {
