@@ -14,7 +14,6 @@
     </script>
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    
     <!--DATATABLES-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
@@ -30,7 +29,7 @@
     <header id="main-header">
         <a id="logo-header">
             <span class="site-name">
-                <h1>SIGEPER</h1>
+                <h2>SIGEPER</h2>
             </span>
         </a>
     </header>
@@ -54,22 +53,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($usuarios as $usuario)
-                        <tr>
-                            <td>{{$usuario->matricula}}</td>
-                            <!-- <td></td>-->
-                            <!-- <td></td>-->
-                            <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
-                            <td>{{$usuario->proyecto}}</td>
-                            <td>{{$usuario->director}}</td>
-                            <td></td>
-                            <td> <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
-                                    style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
+                  @foreach ($usuarios as $usuario)
+                  <tr>
+                    <td>{{$usuario->matricula}}</td>
+                    <!-- <td></td>-->
+                    <!-- <td></td>-->
+                    <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
+                    <td>{{$usuario->proyecto}}</td>
+                    <td>{{$usuario->director}}</td>
+                    <td></td>
+                    <td> <button id="btnEditar" type="button" class="btn btn-primary btn-xs dt-edit"
+                            style="margin-right:16px;"><i class="bi bi-pencil-square"></i>
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
                 </tbody>
             </table>
 

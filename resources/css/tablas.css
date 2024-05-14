@@ -1,26 +1,61 @@
-/* Colores institucionales */
-
-:root {
-    --uv-blue: #18529D;
-    --uv-green: #28AD56;
-    --uv-black: #000000;
-    --uv-white: #FFFFFF;
+#main-header a {
+    color: white;
 }
 
-
-/* Estilos personalizados */
-
-.btn-primary {
-    background-color: var(--uv-blue);
-    border-color: var(--uv-blue);
+td:last-child {
+    text-align: center;
 }
 
-.btn-primary:hover {
-    background-color: #103d7a;
-    border-color: #103d7a;
+body {
+    margin: 2em;
+    padding: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #666;
+    background: #ffffff;
+    font-size: 1em;
+    line-height: 1.5em;
+    padding-top: 70px;
 }
 
-.card-header {
-    background-color: var(--uv-green);
-    color: var(--uv-white);
+h1 {
+    font-size: 2.3em;
+    line-height: 1.3em;
+    margin: 15px 0;
+    text-align: left;
+    font-weight: 300;
+}
+
+#main-header {
+    background: #18529D;
+    color: black;
+    height: 80px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+}
+
+#main-header a {
+    color: #FFFFFF;
+}
+
+.select-container {
+    width: 200px;
+    height: 40px;
+    position: relative;
+}
+
+.select-container select:hover {
+    background-color: #e6e6e6;
+}
+
+.select-container select:focus {
+    outline: none;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 10px;
+    /* Ajusta este valor según el espacio deseado */
 }
