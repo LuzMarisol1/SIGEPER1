@@ -33,7 +33,13 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        //redirect if not admin
+        $user = auth()->user();
+        if ($user->rol->nombre !== "admin") {
+            return redirect()->route("home");
+        }
+        
         //except admin
         $roles = RolUsuario::where("nombre", "!=", "admin")->get();
         return view("crearCuenta", compact("roles"));
