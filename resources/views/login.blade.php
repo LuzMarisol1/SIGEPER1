@@ -2,89 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    
+    <!--PERSONALIZADO-->
+    <link href="css/login.css" rel="stylesheet" />
+   
     <title>Iniciar Sesión</title>
-    <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
-        
-        .login-container {
-            display: flex;
-            height: 100%;
-            width: 100%;
-        }
-        
-        .login-image {
-            flex: 1.5;
-            background-image: url('img/SIGEPER.png');
-            background-size: cover;
-            background-position: center;
-        }
-      
-        .login-form-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            background-color: #fff;
-        }
-        
-        .login-form {
-            max-width: 400px;
-            width: 100%;
-        }
-        
-        h1 {
-            text-align: center;
-        }
-        
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 16px 24px;
-            margin: 12px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        
-        button {
-            background-color: #18529D;
-            color: white;
-            padding: 18px 24px;
-            margin: 12px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        button:hover {
-            background-color: #45a049;
-        }
-        
-        @media (max-width: 768px) {
-            .login-container {
-                flex-direction: column;
-            }
-            .login-image {
-                height: 300px;
-            }
-            .login-form-container {
-                padding: 20px;
-            }
-        }
-    </style>
+    
 </head>
 
 <body>
