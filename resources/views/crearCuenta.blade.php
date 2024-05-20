@@ -17,6 +17,40 @@
     <link href="css/tablas.css" rel="stylesheet" />
     <script type="text/javascript" src="js/tablaAlumnos.js"></script>
     <title>Proyectos de Experiencia Recepcional</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #18529D;
+            color: #fff;
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #18529D;
+            border-color: #18529D;
+        }
+        .btn-primary:hover {
+            background-color: #143d75;
+            border-color: #143d75;
+        }
+        .form-control:focus {
+            border-color: #18529D;
+            box-shadow: 0 0 0 0.25rem rgba(24, 82, 157, 0.25);
+        }
+        .invalid-feedback {
+            color: #dc3545;
+        }
+        /* Fuente personalizada */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    </style>
 </head>
 
 <body>
@@ -24,7 +58,7 @@
     @section('content')
         <div class="container body_content">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-8 mt-5">
                     <div class="card">
                         <div class="card-header">{{ __('Registro') }}</div>
                         <div class="card-body">
@@ -35,8 +69,7 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
                                     <div class="col-md-6">
                                         <input id="name" type="text"
-                                            class="form-control @error('name')
-                                            is-invalid @enderror" name="nombre"
+                                            class="form-control @error('name') is-invalid @enderror" name="nombre"
                                             value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
                                         @error('nombre')
                                             <span class="invalid-feedback" role="alert">
@@ -93,14 +126,9 @@
                                     <div class="col-md-6">
                                         <select id="role" class="form-control @error('rol_usuario_id') is-invalid @enderror"
                                             name="rol_usuario_id" required>
-                                            {{-- options from $roles --}}
                                             @foreach ($roles as $rol)
                                                 <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                                             @endforeach
-                                            {{-- <option value="">Selecciona un rol</option>
-                                            <option value="coordinador">Coordinador</option>
-                                            <option value="maestro">Maestro</option>
-                                            <option value="alumno">Alumno</option> --}}
                                         </select>
                                         @error('rol_usuario_id')
                                             <span class="invalid-feedback" role="alert">
@@ -111,8 +139,8 @@
                                 </div>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary"> Registrar
-
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            {{ __('Registrar') }}
                                         </button>
                                     </div>
                                 </div>
@@ -122,6 +150,5 @@
                 </div>
             </div>
         </div>
-
-
     </body>
+</html>

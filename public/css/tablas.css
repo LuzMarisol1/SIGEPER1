@@ -1,61 +1,64 @@
-#main-header a {
-    color: white;
-}
-
-td:last-child {
-    text-align: center;
-}
-
-.body_content {
-    margin: 2em;
-    padding: 0;
-    font-family: Helvetica, Arial, sans-serif;
-    color: #666;
-    background: #ffffff;
-    font-size: 1em;
-    line-height: 1.5em;
-    padding-top: 70px;
-}
-
-h1 {
-    font-size: 2.3em;
-    line-height: 1.3em;
-    margin: 15px 0;
-    text-align: left;
-    font-weight: 300;
-}
-
-#main-header {
-    background: #18529D;
-    color: black;
-    height: 80px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    /* position: fixed; */
-}
-
-#main-header a {
-    color: #FFFFFF;
-}
-
-.select-container {
-    width: 200px;
-    height: 40px;
-    position: relative;
-}
-
-.select-container select:hover {
-    background-color: #e6e6e6;
-}
-
-.select-container select:focus {
-    outline: none;
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
-}
-
-.modal label {
-    display: block;
-    margin-bottom: 10px;
-    /* Ajusta este valor según el espacio deseado */
-}
+  body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  h1,
+  h3 {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+  }
+  
+  table {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+  }
+  
+  th,
+  td {
+      padding: 12px 15px;
+  }
+  
+  th {
+      background-color: #18529D;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+  }
+  
+  tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+  
+  .alert {
+      margin-top: 20px;
+  }
+  
+  .modal-content {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header,
+  .modal-footer {
+      background-color: #18529D;
+      color: #fff;
+  }
+  
+  .modal-body {
+      padding: 30px;
+  }
+  
+  .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+  }

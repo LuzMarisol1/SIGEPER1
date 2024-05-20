@@ -16,7 +16,22 @@ $(document).ready(function() {
             infoFiltered: '(filtrado de un total de _MAX_ registros)',
             lengthMenu: 'Mostrar _MENU_ registros por página',
             zeroRecords: 'No existen resultados'
-        }
+        },
+        "dom": '<"dt-buttons"Bf><"clear">lirtp',
+        "paging": false,
+        "autoWidth": true,
+        "columnDefs": [
+            { "orderable": false, "targets": 5 }
+        ],
+        "buttons": [
+            'colvis',
+            'copyHtml5',
+            'csvHtml5',
+            'excelHtml5',
+            'pdfHtml5',
+            'print'
+        ]
+
     });
 
     function abrirModal() {
@@ -36,7 +51,7 @@ $(document).ready(function() {
     });
 
     //Permitir solo letras en el input director
-    $('#directorP').on('input', function() {
+    $('#directorProyecto').on('input', function() {
         var letrasV = /[^a-zA-Z]/g;
         if ($(this).val().match(letrasV)) {
             $(this).val($(this).val().replace(letrasV, ''));

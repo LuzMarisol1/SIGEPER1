@@ -24,9 +24,17 @@
 <body>
     <div class="login-container">
         <div class="login-image"></div>
+        <div class="group">
+            <div class="overlap-group">
+                <div class="rectangle"></div>
+                <div class="text-wrapper">Universidad Veracruzana</div>
+            </div>
+        </div>
+                
         <div class="login-form-container">
             <div class="login-form">
                 {{-- Basic login form --}}
+                <div class="text-wrapper-2">SIGEPER</div>
                 <h1>Iniciar Sesión</h1>
                 @if ($errors->any())
                     <div
@@ -48,8 +56,14 @@
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" id="password" required>
                     </div>
-                    <button type="submit">Iniciar Sesión</button>
+                    <button style="background-color: #28ad56;" id="botonIniciarsesión" type="submit">Iniciar Sesión</button>
                 </form>
+                <div class="text-wrapper-6">
+                    <a href="">¿Problemas para ingresar?</a>
+                </div>
+                <div class="overlap-4">
+                    <button style="background-color: #18529d;" id="botonIniciarsesión" type="submit">Crear Cuenta</button>
+                </div>
             </div>
         </div>
     </div>
