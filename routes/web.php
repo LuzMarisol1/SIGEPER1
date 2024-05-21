@@ -39,4 +39,6 @@ Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
 
 //TABLA ESTUDIANTES
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
-Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name('actualizarInfo'); 
+
+//Route::post('/actualizarInfo', 'HomeController@actualizarInfo')->middleware('csrf');

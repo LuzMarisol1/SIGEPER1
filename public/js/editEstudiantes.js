@@ -1,13 +1,9 @@
 $(document).ready(function() {
-    //función para abrir el modal
-    new DataTable('#tablAlumnos', {
+    var tablAlumnos = new DataTable('#tablAlumnos', {
         order: [
             [3, 'desc']
         ],
-
-        Buscar: {
-            return: true
-        },
+        searching: true,
         pagingType: 'simple_numbers',
         language: {
             search: 'Buscar:',
@@ -17,13 +13,13 @@ $(document).ready(function() {
             lengthMenu: 'Mostrar _MENU_ registros por página',
             zeroRecords: 'No existen resultados'
         },
-        "dom": '<"dt-buttons"Bf><"clear">lirtp',
-        "paging": false,
-        "autoWidth": true,
-        "columnDefs": [
-            { "orderable": false, "targets": 5 }
+        dom: '<"dt-buttons"Bf><"clear">lirtp',
+        paging: false,
+        autoWidth: true,
+        columnDefs: [
+            { orderable: false, targets: 5 }
         ],
-        "buttons": [
+        buttons: [
             'colvis',
             'copyHtml5',
             'csvHtml5',
@@ -31,125 +27,99 @@ $(document).ready(function() {
             'pdfHtml5',
             'print'
         ]
-
     });
 
-    function abrirModal() {
-        $('#modalEditardatos').modal('show');
-    }
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    //llama a la función abrirModal()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
+        }
+    });
+
     $('#btnEditar').click(function() {
-        abrirModal();
-    });
-    //Permitir solo letras en el input de titulo
-    $('#tituloProyecto').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
+        $('#modalEditardatos').modal('show');
     });
 
-    //Permitir solo letras en el input director
-    $('#directorProyecto').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
+    $('#tituloProyecto, #directorProyecto').on('input', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
     });
 
-    //enlazar el modal con el ID correspondiente
     $("#modalDatos").on('show.bs.modal', function(event) {
-
         var button = $(event.relatedTarget);
-        var dato = button.data(('usuarios'));
-
-        //actualiza el contenido del modal
-        var modal = $(this);
-        modal.find('.modal-title').text('Nombre ' + dato.nombre);
+        var dato = button.data('usuarios');
+        $(this).find('.modal-title').text('Nombre ' + dato.nombre);
     });
-    /* var estudiante = @json($usuarios);
-     $('.modal').on('show.bs-modal', function(event) {
-         var button = $(event.relatedTarget);
-         var estudianteId = button.data('target').split('-')[1];
-
-         var estudiante = usuarios.find(function(p) {
-             return p.id == estudianteId;
 
 
-             //actualiza el contenido del modal
-             var modal = $(this);
-             modal.find('.modal-title').text('Nombre: ' + estudiante.nombre)
-         });
-     })
-*/
+    // Manejar el evento de clic en el botón "Guardar" de cada modal
+    $(document).on('click', '.btn-guardar-datos', function() {
+        var modal = $(this).closest('.modal');
+        var matricula = modal.find('#matricula').val();
+        var tipoInscripcionId = modal.find('#selectTipoInscripcion').val();
+        var proyecto = modal.find('#tituloProyecto').val();
+        var modalidadId = modal.find('#selectModalidad').val();
+        var director = modal.find('#directorProyecto').val();
+        var estatusId = modal.find('#selectEstatus').val();
 
-    function actualizarDatos() {
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-        $.ajax({
-                url: '/web/actualizarInfo',
-                type: 'POST',
-                data: {
-                    selectInscrip: selectInscrip,
-                    proyecto: proyecto,
-                    selectModalidad: selectModalidad,
-                    nomDirector: nomDirector
-                },
-            })
-            .done(function(respuesta) {
-                if (respuesta["res"] == -1) {
-                    toast.error('No se ha podido actualizar');
-                    ("")
-                }
-                if (respuesta["res"] == 0) {
-                    toastr.info('Actualizado Correctamente');
-                }
-            })
-    }
-
-    /*function actualizarDatos() {
-        //Obtener los valores del formulario
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-
-        //crear un objeto con los datos a enviar 
-
-        var datos = {
-            selectInscrip: selectInscrip,
-            proyecto: proyecto,
-            selectModalidad: selectModalidad,
-            nomDirector: nomDirector
-        };
-
-        //enviar la solicitud AJAX al servidor 
+        // Mostrar mensaje de confirmación utilizando SweetAlert
         Swal.fire({
-            title: '¿Desea modificar los cambiar realizados?',
+            title: '¿Estás seguro?',
+            text: '¿Deseas guardar los cambios?',
             icon: 'warning',
-            buttons: 'Sí, guardar',
-            dangerMode: 'No, cancelar',
-
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
+                // Realizar la solicitud AJAX para actualizar los datos
                 $.ajax({
-                        url: '/web/actualizarInfo',
-                        type: 'GET',
-                        data: datos,
-                    })
-                    .done(function(data) {
-                        toastr.success('Datos actualizados exitosamente')
-                    })
-            } else {
-                toastr.danger('Proceso Cancelado');
+                    url: '/actualizarInfo',
+                    type: 'POST',
+                    data: {
+                        matricula: matricula,
+                        tipoInscripcionId: tipoInscripcionId,
+                        proyecto: proyecto,
+                        modalidad_id: modalidadId,
+                        director: director,
+                        estatus_id: estatusId, // Agregar el estatus a los datos enviados
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.res === 1) {
+                            // Actualización exitosa
+                            modal.modal('hide');
+                            // Mostrar mensaje de éxito utilizando SweetAlert
+                            Swal.fire(
+                                '¡Actualizado!',
+                                'Los datos se han guardado correctamente.',
+                                'success'
+                            ).then(() => {
+                                // Realizar otras acciones necesarias después de la actualización exitosa
+                                location.reload(); // Recargar la página después de la actualización exitosa
+                            });
+                        } else {
+                            // Error en la actualización
+                            Swal.fire(
+                                'Error',
+                                response.msg,
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                        // Mostrar mensaje de error utilizando SweetAlert
+                        Swal.fire(
+                            'Error',
+                            'Ha ocurrido un error en la solicitud.',
+                            'error'
+                        );
+                    }
+                });
             }
-        })
-    } */
-    //llama a la función guardar / actualizar
-    $('#guardarDatos').click(function() {
-        actualizarDatos();
+        });
     });
 });

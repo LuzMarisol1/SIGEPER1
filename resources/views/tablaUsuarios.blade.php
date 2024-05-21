@@ -22,7 +22,7 @@
     <!--PERSONALIZADO-->
     <link href="css/tablas.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/editEstudiantes.js"></script>
+    
     <title>Usuarios</title>
     <style>
         body {
