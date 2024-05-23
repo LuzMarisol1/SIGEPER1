@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var tablAlumnos = new DataTable('#tablAlumnos', {
         order: [
             [3, 'desc']
@@ -7,26 +8,26 @@ $(document).ready(function() {
         pagingType: 'simple_numbers',
         language: {
             search: 'Buscar:',
-            info: 'Mostrando página _PAGE_ de _PAGES_',
-            infoEmpty: 'No hay registros disponibles',
+            info: 'Mostrando _START_ a _END_ de _TOTAL_ registros',
+            infoEmpty: 'Mostrando 0 a 0 de 0 registros',
             infoFiltered: '(filtrado de un total de _MAX_ registros)',
             lengthMenu: 'Mostrar _MENU_ registros por página',
-            zeroRecords: 'No existen resultados'
+            zeroRecords: 'No existen resultados',
+            paginate: {
+                first: 'Primero',
+                last: 'Último',
+                next: 'Siguiente',
+                previous: 'Anterior'
+            }
         },
         dom: '<"dt-buttons"Bf><"clear">lirtp',
-        paging: false,
+        paging: true,
+        pageLength: 10,
         autoWidth: true,
         columnDefs: [
             { orderable: false, targets: 5 }
         ],
-        buttons: [
-            'colvis',
-            'copyHtml5',
-            'csvHtml5',
-            'excelHtml5',
-            'pdfHtml5',
-            'print'
-        ]
+
     });
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -37,8 +38,34 @@ $(document).ready(function() {
         }
     });
 
-    $('#btnEditar').click(function() {
-        $('#modalEditardatos').modal('show');
+    $(document).on('shown.bs.modal', '.modal', function() {
+        var modal = $(this);
+        var directorProyectoInput = modal.find('#directorProyecto');
+        var proyectoinput = modal.find('#tituloProyecto');
+        var maxWords = 20; // número máximo de palabras permitidas
+        var maxCaracteres = 100; // número máximo de caracteres permitidos
+
+        //Evitar el pegado de código en los inputs
+        directorProyectoInput.on('paste', function(e) {
+            e.preventDefault();
+        });
+
+        proyectoinput.on('paste', function(e) {
+            e.preventDefault();
+        });
+
+        directorProyectoInput.on('input', function() {
+            var palabras = $(this).val().trim().split(/\s+/);
+            if (palabras.length > maxWords) {
+                palabras.splice(maxWords);
+                $(this).val(palabras.join(' '));
+                toastr.warning('Se ha alcanzado el límite máximo de palabras permitidas');
+            }
+            if ($(this).val().length > maxCaracteres) {
+                $(this).val($(this).val().slice(0, maxCaracteres));
+                toastr.warning('Se ha alcanzado el límite de caracteres permitidos');
+            }
+        });
     });
 
     $('#tituloProyecto, #directorProyecto').on('input', function() {
@@ -51,6 +78,17 @@ $(document).ready(function() {
         $(this).find('.modal-title').text('Nombre ' + dato.nombre);
     });
 
+    //validar el número de álabras que pueden entrar en los inputs
+    //checar los select la validación 
+    //Excel evitar que se repitan en la BD 
+    //validar antes de subir el archivo excel
+
+    /*if ($('#selectTipoInscripcion').val().trim() === '') {
+        toastr.error("Por favor seleccione el tipo de inscripción");
+    }*/
+    /*if ($('#selectTipoInscripcion').val().trim() === '') {
+        toastr.error("Por favor seleccione el tipo de inscripción");
+    }*/
 
     // Manejar el evento de clic en el botón "Guardar" de cada modal
     $(document).on('click', '.btn-guardar-datos', function() {
@@ -61,6 +99,31 @@ $(document).ready(function() {
         var modalidadId = modal.find('#selectModalidad').val();
         var director = modal.find('#directorProyecto').val();
         var estatusId = modal.find('#selectEstatus').val();
+        if (proyecto == "") {
+            toastr.error("El campo Proyecto no puede quedar vacío. Por favor ingrese información");
+            return;
+        }
+
+        if (director == "") {
+            toastr.error("El campo Director no puede quedar vacío. Por favor ingrese información");
+            return;
+        }
+
+        if (tipoInscripcionId === null || tipoInscripcionId === '') {
+            toastr.error("Por favor seleccione el tipo de inscripción");
+            return;
+        }
+
+        if (modalidadId === null || modalidadId === '') {
+            toastr.error("Por favor seleccione la modalidad");
+            return;
+        }
+
+        if (estatusId === null || estatusId === '') {
+            toastr.error("Por favor seleccione el estatus del estudiante");
+            return;
+        }
+
 
         // Mostrar mensaje de confirmación utilizando SweetAlert
         Swal.fire({

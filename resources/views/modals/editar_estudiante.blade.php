@@ -40,7 +40,7 @@
                     <div class="mb-3">
                         <label class="form-label">Modalidad</label>
                         <select id ="selectModalidad" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccionar</option>
+                            <option value="">Seleccionar</option>
                             <option value="1" {{ $usuario->modalidad_id == 1 ? 'selected' : '' }}>Trabajo
                                 Recepcional</option>
                             <option value="2" {{ $usuario->modalidad_id == 2 ? 'selected' : '' }}>Examen
@@ -52,12 +52,12 @@
                     <div class="mb-3">
                         <label for="directorProyectos" class="form-label">Director</label>
                         <input id="directorProyecto" type="text" class="form-control"
-                            value="{{ $usuario->director }}">
+                        maxlength="255" value="{{ $usuario->director }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Estatus</label>
                         <select id="selectEstatus" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccionar</option>
+                            <option value="">Seleccionar</option>
                             <option value="1" {{ $usuario->estatus_id == 1 ? 'selected' : '' }}>Activo</option>
                             <option value="2" {{ $usuario->estatus_id == 2 ? 'selected' : '' }}>Inactivo</option>
                             <!-- Agrega más opciones según tus requisitos -->
@@ -68,8 +68,8 @@
             </form>
         
         <div id="botonesEdit" class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
             <button id="guardarDatos" type="button" class="btn btn-primary btn-guardar-datos">Guardar</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
         </div>
     </div>
 </div>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Models\UsuarioER;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -81,4 +84,49 @@ class HomeController extends Controller
     
         return response()->json($arrayReturn);
     }
+
+    public function ImportarListaExcel(Request $request){
+        return view ('ImportarListaAlumnos');
+    }
+   
+    public function import(Request $request)
+{
+    if ($request->hasFile('excelFile')) {
+        $file = $request->file('excelFile');
+        $spreadsheet = IOFactory::load($file->getPathname());
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
+
+        foreach ($rows as $index => $row) {
+            // Omitir la primera fila si contiene encabezados
+            if ($index === 0) {
+                continue;
+            }
+
+            if (count($row) < 3) {
+                // La fila no tiene la cantidad esperada de columnas
+                continue;
+            }
+
+            // Limpiar y convertir los datos a UTF-8
+            $nombre = mb_convert_encoding($row[0] ?? '', 'UTF-8', 'auto');
+            $apellido = mb_convert_encoding($row[1] ?? '', 'UTF-8', 'auto');
+            $proyecto = mb_convert_encoding($row[2] ?? '', 'UTF-8', 'auto');
+            $matricula = mb_convert_encoding($row[4] ?? '', 'UTF-8', 'auto');
+
+            $data = [
+                'nombre' => $nombre,
+                'apellido' => $apellido,
+                'matricula' => $matricula,
+                'proyecto' => $proyecto
+            ];
+
+            UsuarioER::create($data);
+        }
+
+        return response()->json(['message' => 'Datos guardados exitosamente']);
+    }
+
+    return response()->json(['error' => 'No se proporcionó ningún archivo Excel'], 400);
+}
 }

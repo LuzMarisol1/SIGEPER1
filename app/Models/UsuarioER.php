@@ -11,6 +11,16 @@ class UsuarioER extends Model
 {
     use HasFactory;
 
+    protected $table = 'usuario_e_r_s';
+
+    protected $fillable = [
+        'nombre',
+        'apellido',
+        'matricula',
+        'proyecto'
+        // Agrega los nombres de los campos que deseas guardar
+    ];
+
     public function documentos(): HasMany
     {
         return $this->hasMany(Documentos::class, "usuario_e_r_id", "id");
