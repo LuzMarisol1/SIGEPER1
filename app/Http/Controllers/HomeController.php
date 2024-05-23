@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UsuarioER;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class HomeController extends Controller
@@ -90,43 +91,61 @@ class HomeController extends Controller
     }
    
     public function import(Request $request)
-{
-    if ($request->hasFile('excelFile')) {
-        $file = $request->file('excelFile');
-        $spreadsheet = IOFactory::load($file->getPathname());
-        $worksheet = $spreadsheet->getActiveSheet();
-        $rows = $worksheet->toArray();
-
-        foreach ($rows as $index => $row) {
-            // Omitir la primera fila si contiene encabezados
-            if ($index === 0) {
-                continue;
+    {
+        if ($request->hasFile('excelFile')) {
+            $file = $request->file('excelFile');
+            $spreadsheet = IOFactory::load($file->getPathname());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+    
+            $duplicates = []; // Array para almacenar las matrículas de los usuarios duplicados
+    
+            foreach ($rows as $index => $row) {
+                // Omitir la primera fila si contiene encabezados
+                if ($index === 0) {
+                    continue;
+                }
+    
+                if (count($row) < 3) {
+                    // La fila no tiene la cantidad esperada de columnas
+                    continue;
+                }
+    
+                // Limpiar y convertir los datos a UTF-8
+                $nombre = mb_convert_encoding($row[0] ?? '', 'UTF-8', 'auto');
+                $apellido = mb_convert_encoding($row[1] ?? '', 'UTF-8', 'auto');
+                $proyecto = mb_convert_encoding($row[2] ?? '', 'UTF-8', 'auto');
+                $matricula = mb_convert_encoding($row[4] ?? '', 'UTF-8', 'auto');
+    
+                // Verificar si ya existe un registro con la misma matrícula
+                $existeUsuario = UsuarioER::where('matricula', $matricula)->first();
+    
+                if (!$existeUsuario) {
+                    $data = [
+                        'nombre' => $nombre,
+                        'apellido' => $apellido,
+                        'matricula' => $matricula,
+                        'proyecto' => $proyecto
+                    ];
+    
+                    UsuarioER::create($data);
+                } else {
+                    $duplicates[] = $matricula; // Agregar la matrícula al array de duplicados
+                    Log::info('Duplicado encontrado: ' . $matricula);
+                }
+            }
+    
+            $message = 'Datos guardados exitosamente';
+    
+            if (count($duplicates) > 0) {
+                $message .= '. Se encontraron ' . count($duplicates) . ' registros duplicados.';
             }
 
-            if (count($row) < 3) {
-                // La fila no tiene la cantidad esperada de columnas
-                continue;
-            }
-
-            // Limpiar y convertir los datos a UTF-8
-            $nombre = mb_convert_encoding($row[0] ?? '', 'UTF-8', 'auto');
-            $apellido = mb_convert_encoding($row[1] ?? '', 'UTF-8', 'auto');
-            $proyecto = mb_convert_encoding($row[2] ?? '', 'UTF-8', 'auto');
-            $matricula = mb_convert_encoding($row[4] ?? '', 'UTF-8', 'auto');
-
-            $data = [
-                'nombre' => $nombre,
-                'apellido' => $apellido,
-                'matricula' => $matricula,
-                'proyecto' => $proyecto
-            ];
-
-            UsuarioER::create($data);
+            Log::info('Mensaje: ' . $message);
+    
+            return response()->json(['message' => 'Datos guardados exitosamente. Se encontraron ' . count($duplicates) . ' registros duplicados.']);
         }
-
-        return response()->json(['message' => 'Datos guardados exitosamente']);
+    
+        return response()->json(['error' => 'No se proporcionó ningún archivo Excel'], 400);
     }
-
-    return response()->json(['error' => 'No se proporcionó ningún archivo Excel'], 400);
-}
 }

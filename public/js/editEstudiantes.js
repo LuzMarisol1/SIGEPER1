@@ -7,6 +7,7 @@ $(document).ready(function() {
         searching: true,
         pagingType: 'simple_numbers',
         language: {
+            emptyTable: "No hay datos disponibles en la tabla",
             search: 'Buscar:',
             info: 'Mostrando _START_ a _END_ de _TOTAL_ registros',
             infoEmpty: 'Mostrando 0 a 0 de 0 registros',
