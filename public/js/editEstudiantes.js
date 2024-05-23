@@ -66,29 +66,19 @@ $(document).ready(function() {
                 toastr.warning('Se ha alcanzado el límite de caracteres permitidos');
             }
         });
+        $('#tituloProyecto, #directorProyecto').on('input', function() {
+            $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
+        });
+
+        $("#modalDatos").on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var dato = button.data('usuarios');
+            $(this).find('.modal-title').text('Nombre ' + dato.nombre);
+        });
     });
 
-    $('#tituloProyecto, #directorProyecto').on('input', function() {
-        $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
-    });
 
-    $("#modalDatos").on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var dato = button.data('usuarios');
-        $(this).find('.modal-title').text('Nombre ' + dato.nombre);
-    });
 
-    //validar el número de álabras que pueden entrar en los inputs
-    //checar los select la validación 
-    //Excel evitar que se repitan en la BD 
-    //validar antes de subir el archivo excel
-
-    /*if ($('#selectTipoInscripcion').val().trim() === '') {
-        toastr.error("Por favor seleccione el tipo de inscripción");
-    }*/
-    /*if ($('#selectTipoInscripcion').val().trim() === '') {
-        toastr.error("Por favor seleccione el tipo de inscripción");
-    }*/
 
     // Manejar el evento de clic en el botón "Guardar" de cada modal
     $(document).on('click', '.btn-guardar-datos', function() {
