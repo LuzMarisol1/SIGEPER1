@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     var tablAlumnos = new DataTable('#tablAlumnos', {
         order: [
             [3, 'desc']
@@ -176,4 +175,49 @@ $(document).ready(function() {
             }
         });
     });
+
+    $(document).on('click', '.btn-eliminar', function() {
+        var id = $(this).data('id');
+        eliminarRegistro(id);
+    });
+
+
+    function eliminarRegistro(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/eliminar-registro/' + id,
+                    type: 'DELETE',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Error',
+                            'No se pudo eliminar el registro.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
 });

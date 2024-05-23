@@ -85,6 +85,13 @@ class HomeController extends Controller
     
         return response()->json($arrayReturn);
     }
+    public function eliminar($id)
+    {
+        $usuario = UsuarioER::findOrFail($id);
+        $usuario->delete();
+
+    return response()->json(['message' => 'Registro eliminado correctamente']);
+}
 
     public function ImportarListaExcel(Request $request){
         return view ('ImportarListaAlumnos');
