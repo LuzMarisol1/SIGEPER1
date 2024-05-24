@@ -1,140 +1,223 @@
 $(document).ready(function() {
-    //función para abrir el modal
-    new DataTable('#tablAlumnos', {
+    var tablAlumnos = new DataTable('#tablAlumnos', {
         order: [
             [3, 'desc']
         ],
-
-        Buscar: {
-            return: true
-        },
+        searching: true,
         pagingType: 'simple_numbers',
         language: {
+            emptyTable: "No hay datos disponibles en la tabla",
             search: 'Buscar:',
-            info: 'Mostrando página _PAGE_ de _PAGES_',
-            infoEmpty: 'No hay registros disponibles',
+            info: 'Mostrando _START_ a _END_ de _TOTAL_ registros',
+            infoEmpty: 'Mostrando 0 a 0 de 0 registros',
             infoFiltered: '(filtrado de un total de _MAX_ registros)',
             lengthMenu: 'Mostrar _MENU_ registros por página',
-            zeroRecords: 'No existen resultados'
+            zeroRecords: 'No existen resultados',
+            paginate: {
+                first: 'Primero',
+                last: 'Último',
+                next: 'Siguiente',
+                previous: 'Anterior'
+            }
+        },
+        dom: '<"dt-buttons"Bf><"clear">lirtp',
+        paging: true,
+        pageLength: 10,
+        autoWidth: true,
+        columnDefs: [
+            { orderable: false, targets: 5 }
+        ],
+
+    });
+
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
         }
     });
 
-    function abrirModal() {
-        $('#modalEditardatos').modal('show');
-    }
-
-    //llama a la función abrirModal()
-    $('#btnEditar').click(function() {
-        abrirModal();
-    });
-    //Permitir solo letras en el input de titulo
-    $('#tituloProyecto').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
-    });
-
-    //Permitir solo letras en el input director
-    $('#directorP').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
-    });
-
-    //enlazar el modal con el ID correspondiente
-    $("#modalDatos").on('show.bs.modal', function(event) {
-
-        var button = $(event.relatedTarget);
-        var dato = button.data(('usuarios'));
-
-        //actualiza el contenido del modal
+    $(document).on('shown.bs.modal', '.modal', function() {
         var modal = $(this);
-        modal.find('.modal-title').text('Nombre ' + dato.nombre);
+        var directorProyectoInput = modal.find('#directorProyecto');
+        var proyectoinput = modal.find('#tituloProyecto');
+        var maxWords = 20; // número máximo de palabras permitidas
+        var maxCaracteres = 100; // número máximo de caracteres permitidos
+
+        //Evitar el pegado de código en los inputs
+        directorProyectoInput.on('paste', function(e) {
+            e.preventDefault();
+        });
+
+        proyectoinput.on('paste', function(e) {
+            e.preventDefault();
+        });
+
+        directorProyectoInput.on('input', function() {
+            var palabras = $(this).val().trim().split(/\s+/);
+            if (palabras.length > maxWords) {
+                palabras.splice(maxWords);
+                $(this).val(palabras.join(' '));
+                toastr.warning('Se ha alcanzado el límite máximo de palabras permitidas');
+            }
+            if ($(this).val().length > maxCaracteres) {
+                $(this).val($(this).val().slice(0, maxCaracteres));
+                toastr.warning('Se ha alcanzado el límite de caracteres permitidos');
+            }
+        });
+        $('#tituloProyecto, #directorProyecto').on('input', function() {
+            $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
+        });
+
+        $("#modalDatos").on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var dato = button.data('usuarios');
+            $(this).find('.modal-title').text('Nombre ' + dato.nombre);
+        });
     });
-    /* var estudiante = @json($usuarios);
-     $('.modal').on('show.bs-modal', function(event) {
-         var button = $(event.relatedTarget);
-         var estudianteId = button.data('target').split('-')[1];
-
-         var estudiante = usuarios.find(function(p) {
-             return p.id == estudianteId;
 
 
-             //actualiza el contenido del modal
-             var modal = $(this);
-             modal.find('.modal-title').text('Nombre: ' + estudiante.nombre)
-         });
-     })
-*/
 
-    function actualizarDatos() {
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-        $.ajax({
-                url: '/web/actualizarInfo',
-                type: 'POST',
-                data: {
-                    selectInscrip: selectInscrip,
-                    proyecto: proyecto,
-                    selectModalidad: selectModalidad,
-                    nomDirector: nomDirector
-                },
-            })
-            .done(function(respuesta) {
-                if (respuesta["res"] == -1) {
-                    toast.error('No se ha podido actualizar');
-                    ("")
-                }
-                if (respuesta["res"] == 0) {
-                    toastr.info('Actualizado Correctamente');
-                }
-            })
-    }
 
-    /*function actualizarDatos() {
-        //Obtener los valores del formulario
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
+    // Manejar el evento de clic en el botón "Guardar" de cada modal
+    $(document).on('click', '.btn-guardar-datos', function() {
+        var modal = $(this).closest('.modal');
+        var matricula = modal.find('#matricula').val();
+        var tipoInscripcionId = modal.find('#selectTipoInscripcion').val();
+        var proyecto = modal.find('#tituloProyecto').val();
+        var modalidadId = modal.find('#selectModalidad').val();
+        var director = modal.find('#directorProyecto').val();
+        var estatusId = modal.find('#selectEstatus').val();
+        if (proyecto == "") {
+            toastr.error("El campo Proyecto no puede quedar vacío. Por favor ingrese información");
+            return;
+        }
 
-        //crear un objeto con los datos a enviar 
+        if (director == "") {
+            toastr.error("El campo Director no puede quedar vacío. Por favor ingrese información");
+            return;
+        }
 
-        var datos = {
-            selectInscrip: selectInscrip,
-            proyecto: proyecto,
-            selectModalidad: selectModalidad,
-            nomDirector: nomDirector
-        };
+        if (tipoInscripcionId === null || tipoInscripcionId === '') {
+            toastr.error("Por favor seleccione el tipo de inscripción");
+            return;
+        }
 
-        //enviar la solicitud AJAX al servidor 
+        if (modalidadId === null || modalidadId === '') {
+            toastr.error("Por favor seleccione la modalidad");
+            return;
+        }
+
+        if (estatusId === null || estatusId === '') {
+            toastr.error("Por favor seleccione el estatus del estudiante");
+            return;
+        }
+
+
+        // Mostrar mensaje de confirmación utilizando SweetAlert
         Swal.fire({
-            title: '¿Desea modificar los cambiar realizados?',
+            title: '¿Estás seguro?',
+            text: '¿Deseas guardar los cambios?',
             icon: 'warning',
-            buttons: 'Sí, guardar',
-            dangerMode: 'No, cancelar',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Realizar la solicitud AJAX para actualizar los datos
+                $.ajax({
+                    url: '/actualizarInfo',
+                    type: 'POST',
+                    data: {
+                        matricula: matricula,
+                        tipoInscripcionId: tipoInscripcionId,
+                        proyecto: proyecto,
+                        modalidad_id: modalidadId,
+                        director: director,
+                        estatus_id: estatusId, // Agregar el estatus a los datos enviados
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.res === 1) {
+                            // Actualización exitosa
+                            modal.modal('hide');
+                            // Mostrar mensaje de éxito utilizando SweetAlert
+                            Swal.fire(
+                                '¡Actualizado!',
+                                'Los datos se han guardado correctamente.',
+                                'success'
+                            ).then(() => {
+                                // Realizar otras acciones necesarias después de la actualización exitosa
+                                location.reload(); // Recargar la página después de la actualización exitosa
+                            });
+                        } else {
+                            // Error en la actualización
+                            Swal.fire(
+                                'Error',
+                                response.msg,
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                        // Mostrar mensaje de error utilizando SweetAlert
+                        Swal.fire(
+                            'Error',
+                            'Ha ocurrido un error en la solicitud.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
 
+    $(document).on('click', '.btn-eliminar', function() {
+        var id = $(this).data('id');
+        eliminarRegistro(id);
+    });
+
+
+    function eliminarRegistro(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción no se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                        url: '/web/actualizarInfo',
-                        type: 'GET',
-                        data: datos,
-                    })
-                    .done(function(data) {
-                        toastr.success('Datos actualizados exitosamente')
-                    })
-            } else {
-                toastr.danger('Proceso Cancelado');
+                    url: '/eliminar-registro/' + id,
+                    type: 'DELETE',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El registro ha sido eliminado.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Error',
+                            'No se pudo eliminar el registro.',
+                            'error'
+                        );
+                    }
+                });
             }
-        })
-    } */
-    //llama a la función guardar / actualizar
-    $('#guardarDatos').click(function() {
-        actualizarDatos();
-    });
+        });
+    }
 });

@@ -19,41 +19,35 @@ $(document).ready(function() {
         }
     });
 
-    function abrirModal() {
-        $('#modalEditardatos').modal('show');
-    }
+    //function abrirModal() {
+    //    $('#modalEditardatos').modal('show');
+    //}
 
     //llama a la función abrirModal()
-    $('#btnEditar').click(function() {
-        abrirModal();
-    });
-    //Permitir solo letras en el input de titulo
-    $('#tituloProyecto').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
-    });
+    //$('#btnEditar').click(function() {
+    ////abrirModal();
+    //});
 
-    //Permitir solo letras en el input director
-    $('#directorP').on('input', function() {
-        var letrasV = /[^a-zA-Z]/g;
-        if ($(this).val().match(letrasV)) {
-            $(this).val($(this).val().replace(letrasV, ''));
-        }
-    });
 
-    //enlazar el modal con el ID correspondiente
-    $("#modalDatos").on('show.bs.modal', function(event) {
+});
+//Permitir solo letras en el input de titulo
+$('#tituloProyecto').on('input', function() {
+    var letrasV = /[^a-zA-Z]/g;
+    if ($(this).val().match(letrasV)) {
+        $(this).val($(this).val().replace(letrasV, ''));
+    }
+});
 
-        var button = $(event.relatedTarget);
-        var dato = button.data(('usuarios'));
+//Permitir solo letras en el input director
+$('#directorP').on('input', function() {
+    var letrasV = /[^a-zA-Z]/g;
+    if ($(this).val().match(letrasV)) {
+        $(this).val($(this).val().replace(letrasV, ''));
+    }
+});
 
-        //actualiza el contenido del modal
-        var modal = $(this);
-        modal.find('.modal-title').text('Nombre ' + dato.nombre);
-    });
-    /* var estudiante = @json($usuarios);
+
+/* var estudiante = @json($usuarios);
      $('.modal').on('show.bs-modal', function(event) {
          var button = $(event.relatedTarget);
          var estudianteId = button.data('target').split('-')[1];
@@ -69,72 +63,71 @@ $(document).ready(function() {
      })
 */
 
-    function actualizarDatos() {
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-        $.ajax({
-                url: '/web/actualizarInfo',
-                type: 'POST',
-                data: {
-                    selectInscrip: selectInscrip,
-                    proyecto: proyecto,
-                    selectModalidad: selectModalidad,
-                    nomDirector: nomDirector
-                },
-            })
-            .done(function(respuesta) {
-                if (respuesta["res"] == -1) {
-                    toast.error('No se ha podido actualizar');
-                    ("")
-                }
-                if (respuesta["res"] == 0) {
-                    toastr.info('Actualizado Correctamente');
-                }
-            })
-    }
-
-    /*function actualizarDatos() {
-        //Obtener los valores del formulario
-        var selectInscrip = $('#selectTipoInscripcion').val();
-        var proyecto = $('#tituloProyecto').val();
-        var selectModalidad = $('#selectModalidad').val();
-        var nomDirector = $('#directorP').val();
-
-        //crear un objeto con los datos a enviar 
-
-        var datos = {
-            selectInscrip: selectInscrip,
-            proyecto: proyecto,
-            selectModalidad: selectModalidad,
-            nomDirector: nomDirector
-        };
-
-        //enviar la solicitud AJAX al servidor 
-        Swal.fire({
-            title: '¿Desea modificar los cambiar realizados?',
-            icon: 'warning',
-            buttons: 'Sí, guardar',
-            dangerMode: 'No, cancelar',
-
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                        url: '/web/actualizarInfo',
-                        type: 'GET',
-                        data: datos,
-                    })
-                    .done(function(data) {
-                        toastr.success('Datos actualizados exitosamente')
-                    })
-            } else {
-                toastr.danger('Proceso Cancelado');
+function actualizarDatos() {
+    var selectInscrip = $('#selectTipoInscripcion').val();
+    var proyecto = $('#tituloProyecto').val();
+    var selectModalidad = $('#selectModalidad').val();
+    var nomDirector = $('#directorP').val();
+    $.ajax({
+            url: '/web/actualizarInfo',
+            type: 'POST',
+            data: {
+                selectInscrip: selectInscrip,
+                proyecto: proyecto,
+                selectModalidad: selectModalidad,
+                nomDirector: nomDirector
+            },
+        })
+        .done(function(respuesta) {
+            if (respuesta["res"] == -1) {
+                toast.error('No se ha podido actualizar');
+                ("")
+            }
+            if (respuesta["res"] == 0) {
+                toastr.info('Actualizado Correctamente');
             }
         })
-    } */
-    //llama a la función guardar / actualizar
-    $('#guardarDatos').click(function() {
-        actualizarDatos();
-    });
+}
+
+/*function actualizarDatos() {
+    //Obtener los valores del formulario
+    var selectInscrip = $('#selectTipoInscripcion').val();
+    var proyecto = $('#tituloProyecto').val();
+    var selectModalidad = $('#selectModalidad').val();
+    var nomDirector = $('#directorP').val();
+
+    //crear un objeto con los datos a enviar 
+
+    var datos = {
+        selectInscrip: selectInscrip,
+        proyecto: proyecto,
+        selectModalidad: selectModalidad,
+        nomDirector: nomDirector
+    };
+
+    //enviar la solicitud AJAX al servidor 
+    Swal.fire({
+        title: '¿Desea modificar los cambiar realizados?',
+        icon: 'warning',
+        buttons: 'Sí, guardar',
+        dangerMode: 'No, cancelar',
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: '/web/actualizarInfo',
+                    type: 'GET',
+                    data: datos,
+                })
+                .done(function(data) {
+                    toastr.success('Datos actualizados exitosamente')
+                })
+        } else {
+            toastr.danger('Proceso Cancelado');
+        }
+    })
+} */
+//llama a la función guardar / actualizar
+$('#guardarDatos').click(function() {
+    actualizarDatos();
 });

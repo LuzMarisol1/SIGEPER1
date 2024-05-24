@@ -39,4 +39,7 @@ Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
 
 //TABLA ESTUDIANTES
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
-Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name('actualizarInfo'); 
+Route::get('/ImportarListaAlumnos', 'App\Http\Controllers\HomeController@ImportarListaExcel');
+Route::post('/import-csv', 'App\Http\Controllers\HomeController@import')->name('import-csv');
+Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@eliminar');
