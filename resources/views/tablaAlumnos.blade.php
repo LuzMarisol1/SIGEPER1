@@ -60,9 +60,12 @@
                                 <td>{{ $usuario->director }}</td>
                                 <td>{{ $usuario->estatus_id }}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarEstudianteModal{{ $usuario->id }}">
-                                        <i class="bi bi-pencil-square"></i> Editar
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarEstudianteModal{{ $usuario->id }}" title="Editar estudiante">
+                                        <i class="bi bi-pencil-square"></i> 
                                     </a>
+                                    <button class="btn btn-danger btn-sm btn-eliminar" data-id="{{ $usuario->id }}" title="Eliminar estudiante">
+                                        <i class="bi bi-trash"></i> 
+                                    </button>
                                 </td>
                             </tr>
                             @include('modals.editar_estudiante', ['usuario' => $usuario])
