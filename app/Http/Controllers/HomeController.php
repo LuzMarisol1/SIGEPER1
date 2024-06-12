@@ -7,6 +7,7 @@ use App\Models\UsuarioER;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\Usuario_e_r;
 
 
 class HomeController extends Controller
@@ -36,7 +37,10 @@ class HomeController extends Controller
 
    
     public function viewTablaEstudiantes(Request $request){
-        $usuarios = DB::table('usuario_e_r_s')->get();
+        $usuarios = Usuario_e_r::join('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
+        ->select('usuario_e_r_s.id', 'usuario_e_r_s.nombre AS nombreUsuario', 'usuario_e_r_s.apellido', 'usuario_e_r_s.matricula', 'estatuses.nombre AS nombreEstatus')
+        ->get();
+
         return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
   

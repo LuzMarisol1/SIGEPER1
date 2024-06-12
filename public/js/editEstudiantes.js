@@ -26,7 +26,7 @@ $(document).ready(function() {
         autoWidth: true,
         columnDefs: [
             { orderable: false, targets: 5 }
-        ],
+        ]
 
     });
 
@@ -40,13 +40,15 @@ $(document).ready(function() {
 
     $(document).on('shown.bs.modal', '.modal', function() {
         var modal = $(this);
-        var directorProyectoInput = modal.find('#directorProyecto');
-        var proyectoinput = modal.find('#tituloProyecto');
+        //var directorProyectoInput = modal.find('#directorProyecto');
+        var tituloProyecto = modal.find("#tituloProyecto");
+        var proyectoinput = modal.find('#directorProyecto');
         var maxWords = 20; // número máximo de palabras permitidas
         var maxCaracteres = 100; // número máximo de caracteres permitidos
+        var modalidad = modal.find('#selectModalidad');
 
         //Evitar el pegado de código en los inputs
-        directorProyectoInput.on('paste', function(e) {
+        proyectoinput.on('paste', function(e) {
             e.preventDefault();
         });
 
@@ -54,7 +56,7 @@ $(document).ready(function() {
             e.preventDefault();
         });
 
-        directorProyectoInput.on('input', function() {
+        proyectoinput.on('input', function() {
             var palabras = $(this).val().trim().split(/\s+/);
             if (palabras.length > maxWords) {
                 palabras.splice(maxWords);
@@ -66,7 +68,7 @@ $(document).ready(function() {
                 toastr.warning('Se ha alcanzado el límite de caracteres permitidos');
             }
         });
-        $('#tituloProyecto, #directorProyecto').on('input', function() {
+        $('#proyectoinput, #directorProyecto').on('input', function() {
             $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
         });
 
@@ -75,6 +77,47 @@ $(document).ready(function() {
             var dato = button.data('usuarios');
             $(this).find('.modal-title').text('Nombre ' + dato.nombre);
         });
+
+
+        modalidad.change(function() {
+            if ($(this).val() === '2') {
+                proyectoinput.prop('disabled', true);
+                proyectoinput.closest('.mb-3').hide();
+                proyectoinput.val(''); // Limpiar el valor del campo
+                proyectoinput.removeClass('is-invalid'); // Eliminar la clase de validación
+            } else if ($(this).val() === '3') {
+                proyectoinput.prop('disabled', true);
+                proyectoinput.closest('.mb-3').hide();
+                proyectoinput.val(''); // Limpiar el valor del campo
+                proyectoinput.removeClass('is-invalid'); // Eliminar la clase de validación
+            } else if ($(this).val() === '2') {
+                proyectoinput.prop('disabled', true);
+                proyectoinput.closest('.mb-3').hide();
+                proyectoinput.val(''); // Limpiar el valor del campo
+                proyectoinput.removeClass('is-invalid'); // Eliminar la clase de validación
+            } else {
+                proyectoinput.prop('disabled', false);
+                proyectoinput.closest('.mb-3').show();
+            }
+        });
+
+        modalidad.change(function() {
+            if ($(this).val() === '2') {
+                tituloProyecto.prop('disabled', true);
+                tituloProyecto.closest('.mb-3').hide();
+                tituloProyecto.val(''); // Limpiar el valor del campo
+                tituloProyecto.removeClass('is-invalid'); // Eliminar la clase de validación
+            } else if ($(this).val() === '3') {
+                tituloProyecto.prop('disabled', true);
+                tituloProyecto.closest('.mb-3').hide();
+                tituloProyecto.val(''); // Limpiar el valor del campo
+                tituloProyecto.removeClass('is-invalid'); // Eliminar la clase de validación
+            } else {
+                tituloProyecto.prop('disabled', false);
+                tituloProyecto.closest('.mb-3').show();
+            }
+        });
+
     });
 
 
@@ -85,16 +128,17 @@ $(document).ready(function() {
         var modal = $(this).closest('.modal');
         var matricula = modal.find('#matricula').val();
         var tipoInscripcionId = modal.find('#selectTipoInscripcion').val();
+        var tituloProyecto = modal.find('#tituloProyecto');
         var proyecto = modal.find('#tituloProyecto').val();
+        var directorProyectoInput = modal.find('#directorProyecto');
         var modalidadId = modal.find('#selectModalidad').val();
         var director = modal.find('#directorProyecto').val();
         var estatusId = modal.find('#selectEstatus').val();
-        if (proyecto == "") {
+        if (proyecto == "" && !tituloProyecto.prop('disabled')) {
             toastr.error("El campo Proyecto no puede quedar vacío. Por favor ingrese información");
             return;
         }
-
-        if (director == "") {
+        if (director == "" && !directorProyectoInput.prop('disabled')) {
             toastr.error("El campo Director no puede quedar vacío. Por favor ingrese información");
             return;
         }

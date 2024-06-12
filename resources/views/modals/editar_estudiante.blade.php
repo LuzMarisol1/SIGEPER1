@@ -27,32 +27,36 @@
                             <option value="">Seleccionar</option>
                             <option value="1" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
                                 Inscripción</option>
-                            <option value="2" {{ $usuario->tipo_inscripcion_id == 2 ? 'selected' : '' }}>
-                                Continuidad</option>
+                            <option value="2" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
+                                Inscripción Continuidad</option>
                             <option value="3" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
                                 Inscripción</option>
+                            <option value="4" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
+                                Inscripción (Continuidad)</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="tituloProyectos" class="tituloProyecto">Proyecto</label>
-                        <input id="tituloProyecto" type="text" class="form-control" value="{{ $usuario->proyecto }}">
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label">Modalidad</label>
-                        <select id ="selectModalidad" class="form-select" aria-label="Default select example">
+                        <select id="selectModalidad" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
                             <option value="1" {{ $usuario->modalidad_id == 1 ? 'selected' : '' }}>Trabajo
                                 Recepcional</option>
-                            <option value="2" {{ $usuario->modalidad_id == 2 ? 'selected' : '' }}>Examen
-                                CENEVAL</option>
+                            <option value="2" {{ $usuario->modalidad_id == 2 ? 'selected' : '' }}>Examen CENEVAL
+                            </option>
                             <option value="3" {{ $usuario->modalidad_id == 3 ? 'selected' : '' }}>Promedio
                             </option>
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="tituloProyectos" class="tituloProyecto">Proyecto</label>
+                        <input id="tituloProyecto" type="text" class="form-control"
+                            value="{{ $usuario->proyecto }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="directorProyectos" class="form-label">Director</label>
-                        <input id="directorProyecto" type="text" class="form-control"
-                        maxlength="255" value="{{ $usuario->director }}">
+                        <input id="directorProyecto" type="text" class="form-control" maxlength="255"
+                            value="{{ $usuario->director }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Estatus</label>
@@ -66,11 +70,11 @@
             </div>
 
             </form>
-        
-        <div id="botonesEdit" class="modal-footer">
-            <button id="guardarDatos" type="button" class="btn btn-primary btn-guardar-datos">Guardar</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+
+            <div id="botonesEdit" class="modal-footer">
+                <button id="guardarDatos" type="button" class="btn btn-primary btn-guardar-datos">Guardar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            </div>
         </div>
     </div>
-</div>
 </div>

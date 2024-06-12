@@ -18,15 +18,21 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('matricula');
-            $table->string('proyecto');
-            $table->string('director');
+            $table->string('proyecto')->nullable();
+            $table->string('director')->nullable();
             $table->timestamps();
-            $table->foreignId("experiencia_recepcional_id")->constrained("experiencia_recepcionals");
-            $table->foreignId("estatus_id")->constrained("estatuses");
-            $table->foreignId("tipo_inscripcion_id")->constrained("tipo_inscripcions");
-            $table->foreignId("usuario_id")->constrained("usuarios");
-            $table->foreignId("modalidad_id")->constrained("modalidads");
-            $table->foreignId("catalogo_semestre_id")->constrained("catalogo_semestres");
+            $table->unsignedBigInteger('experiencia_recepcional_id')->nullable();
+            $table->foreign('experiencia_recepcional_id')->references('id')->on('experiencia_recepcionals')->onDelete('set null');
+            $table->unsignedBigInteger('estatus_id')->nullable();
+            $table->foreign('estatus_id')->references('id')->on('estatuses')->onDelete('set null');
+            $table->unsignedBigInteger('tipo_inscripcion_id')->nullable();
+            $table->foreign('tipo_inscripcion_id')->references('id')->on('estatuses')->onDelete('set null');
+            $table->unsignedBigInteger('usuario_id')->nullable();
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('set null');
+            $table->unsignedBigInteger('modalidad_id')->nullable();
+            $table->foreign('modalidad_id')->references('id')->on('modalidads')->onDelete('set null');
+            $table->unsignedBigInteger('catalogo_semestre_id')->nullable();
+            $table->foreign('catalogo_semestre_id')->references('id')->on('catalogo_semestres')->onDelete('set null');
         });
     }
 
