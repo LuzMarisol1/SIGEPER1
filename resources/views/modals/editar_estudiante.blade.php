@@ -18,7 +18,7 @@
                     <div class="mb-3">
                         <label for="tituloProyecto" class="campoTitulo">Nombre</label>
                         <input type="text" class="form-control" id="nombre"
-                            value="{{ $usuario->nombre . ' ' . $usuario->apellido }}" readonly
+                            value="{{ $usuario->nombreUsuario . ' ' . $usuario->apellido }}" readonly
                             style="background-color: #e9ecef; color: #495057;">
                     </div>
                     <div id="tipoInscripcion" class="mb-3">
@@ -27,14 +27,12 @@
                             <option value="">Seleccionar</option>
                             <option value="1" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
                                 Inscripción</option>
-                            <option value="2" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
+                            <option value="2" {{ $usuario->tipo_inscripcion_id == 2 ? 'selected' : '' }}>Primera
                                 Inscripción Continuidad</option>
-                            <option value="3" {{ $usuario->tipo_inscripcion_id == 2 ? 'selected' : '' }}>
-                                Continuidad</option>
-                            <option value="4" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
+                            <option value="3" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
                                 Inscripción</option>
-                            <option value="5" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
-                                Inscripción</option>
+                            <option value="4" {{ $usuario->tipo_inscripcion_id == 4 ? 'selected' : '' }}>Segunda
+                                Inscripción Continuidad</option>
                         </select>
                     </div>
                     <div class="mb-3">
