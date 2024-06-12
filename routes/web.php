@@ -29,17 +29,17 @@ Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstu
 Route::get('/registro', [RegistroController::class], 'create');
 Route::post('registro', [RegistroController::class], 'store');*/
 // Route::get('/cuenta', [HomeController::class, 'registrarUsuario'])->middleware('auth');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/crearUsuario', [UsuarioController::class, 'create'])->name('crearUsuario');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/crearUsuario', [UsuarioController::class, 'create'])->name('crearUsuario')->middleware('auth');
 Route::post('/storeUsuario', [UsuarioController::class, 'store'])->name('storeUsuario');
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios')->middleware('auth');
 
 
 //TABLA ESTUDIANTES
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
-Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name('actualizarInfo'); 
+Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name('actualizarInfo');
 Route::get('/ImportarListaAlumnos', 'App\Http\Controllers\HomeController@ImportarListaExcel');
 Route::post('/import-csv', 'App\Http\Controllers\HomeController@import')->name('import-csv');
 Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@eliminar');

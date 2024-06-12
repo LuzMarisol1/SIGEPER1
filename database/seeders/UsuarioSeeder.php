@@ -26,8 +26,8 @@ class UsuarioSeeder extends Seeder
             $admin->correo = "admin@example.com";
             $admin->password = Hash::make("admin");
             $rol = RolUsuario::where("nombre", "admin")->first();
-            $admin->rol()->associate($rol);
             $admin->save();
+            $admin->roles()->attach($rol);
         }
     }
 }

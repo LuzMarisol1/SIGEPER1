@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -21,9 +22,9 @@ class Usuario extends Authenticatable
         'remember_token',
     ];
 
-    public function rol(): BelongsTo
+    public function roles(): BelongsToMany
     {
-        return $this->belongsTo(RolUsuario::class, "rol_usuario_id", "id");
+        return $this->belongsToMany(RolUsuario::class, "usuario_tiene_rols")->using(UsuarioTieneRol::class);
     }
 
     public function usuarioERs(): HasMany

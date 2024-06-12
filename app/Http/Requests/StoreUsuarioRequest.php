@@ -13,7 +13,7 @@ class StoreUsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        return ($this->user()->rol->nombre === "admin");
+        return ($this->user()->roles->contains("nombre", "admin"));
     }
 
     /**
@@ -27,7 +27,8 @@ class StoreUsuarioRequest extends FormRequest
             "nombre" => ["required", "string", "max:255"],
             "correo" => ["required", "string", "email", "max:255", "unique:usuarios"],
             "password" => ["required", "string", "min:8", "confirmed"],
-            "rol_usuario_id" => ["required", "exists:rol_usuarios,id"]
+            "rol_usuario_id" => ["required", "array"],
+            "rol_usuario_id.*" => ["exists:rol_usuarios,id"]
         ];
     }
 }

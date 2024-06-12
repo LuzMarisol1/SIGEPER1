@@ -124,8 +124,8 @@
                                     <label for="role"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
                                     <div class="col-md-6">
-                                        <select id="role" class="form-control @error('rol_usuario_id') is-invalid @enderror"
-                                            name="rol_usuario_id" required>
+                                        <select multiple id="role" class="form-control @error('rol_usuario_id') is-invalid @enderror"
+                                            name="rol_usuario_id[]" required>
                                             @foreach ($roles as $rol)
                                                 <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                                             @endforeach

@@ -21,6 +21,9 @@ $(document).ready(function() {
             }
         },
         dom: '<"dt-buttons"Bf><"clear">lirtp',
+        buttons: [
+            'excel'
+        ],
         paging: true,
         pageLength: 10,
         autoWidth: true,

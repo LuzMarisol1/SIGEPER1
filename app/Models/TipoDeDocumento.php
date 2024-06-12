@@ -17,7 +17,7 @@ class TipoDeDocumento extends Model
 
     public function modalidades(): BelongsToMany
     {
-        return $this->belongsToMany(Modalidad::class)->using(DocModalidad::class);
+        return $this->belongsToMany(Modalidad::class, "doc_modalidads")->using(DocModalidad::class);
     }
 
     public function documentos(): HasMany

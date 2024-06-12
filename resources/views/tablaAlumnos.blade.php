@@ -10,17 +10,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <link href="css/tablas.css" rel="stylesheet" />
     <link href="css/tablaAlumnos.css" rel="stylesheet" />
     <script src="../js/importarLIstaAlumnos.js"></script>
     @stack('styles')
 </head>
+
 <body>
     @include('shared.navbar')
 
@@ -35,10 +38,11 @@
             <div class="container">
                 <h1 class="text-center">Proyectos de Experiencia Recepcional</h1>
                 <h3 class="text-center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
-
-                <button id="importButton" class="btn btn-success mb-3">
-                    <i class="fas fa-file-excel"></i> Importar Lista
-                </button>
+                <div id="tableButtons">
+                    <button id="importButton" class="btn btn-success mb-3">
+                        <i class="fas fa-file-excel"></i> Importar Listaa
+                    </button>
+                </div>
 
                 <table id="tablAlumnos" class="display" style="width:100%">
                     <thead>
@@ -60,11 +64,14 @@
                                 <td>{{ $usuario->director }}</td>
                                 <td>{{ $usuario->estatus_id }}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarEstudianteModal{{ $usuario->id }}" title="Editar estudiante">
-                                        <i class="bi bi-pencil-square"></i> 
+                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editarEstudianteModal{{ $usuario->id }}"
+                                        title="Editar estudiante">
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <button class="btn btn-danger btn-sm btn-eliminar" data-id="{{ $usuario->id }}" title="Eliminar estudiante">
-                                        <i class="bi bi-trash"></i> 
+                                    <button class="btn btn-danger btn-sm btn-eliminar" data-id="{{ $usuario->id }}"
+                                        title="Eliminar estudiante">
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -78,7 +85,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/table2excel@1.0.4/dist/table2excel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="js/editEstudiantes.js"></script>

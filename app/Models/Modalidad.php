@@ -17,7 +17,7 @@ class Modalidad extends Model
 
     public function tiposDocumento(): BelongsToMany
     {
-        return $this->belongsToMany(TipoDeDocumento::class)->using(DocModalidad::class);
+        return $this->belongsToMany(TipoDeDocumento::class, "doc_modalidads")->using(DocModalidad::class);
     }
 
     public function usuarioERs(): HasMany

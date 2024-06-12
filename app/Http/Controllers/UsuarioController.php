@@ -19,7 +19,7 @@ class UsuarioController extends Controller
     {
         //redirect if not admin
         $user = auth()->user();
-        if ($user->rol->nombre !== "admin") {
+        if (!$user->roles->contains("nombre", "admin")) {
             return redirect()->route("home");
         }
 
@@ -33,13 +33,13 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         //redirect if not admin
         $user = auth()->user();
-        if ($user->rol->nombre !== "admin") {
+        if (!$user->roles->contains("nombre", "admin")) {
             return redirect()->route("home");
         }
-        
+
         //except admin
         $roles = RolUsuario::where("nombre", "!=", "admin")->get();
         return view("crearCuenta", compact("roles"));
@@ -58,8 +58,8 @@ class UsuarioController extends Controller
         $usuario->nombre = $validated["nombre"];
         $usuario->correo = $validated["correo"];
         $usuario->password = Hash::make($validated["password"]);
-        $usuario->rol_usuario_id = $validated["rol_usuario_id"];
         $usuario->save();
+        $usuario->roles()->sync($validated["rol_usuario_id"]);
         // return redirect()->back()->with("success", "Usuario creado exitosamente");
         return redirect()->route("usuarios")->with("success", "Usuario creado exitosamente");
     }

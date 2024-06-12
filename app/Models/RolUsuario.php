@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RolUsuario extends Model
 {
@@ -13,9 +13,8 @@ class RolUsuario extends Model
         "nombre",
         "descripcion"
     ];
-
-    public function usuarios(): HasMany
+    public function usuarios(): BelongsToMany
     {
-        return $this->hasMany(Usuario::class,"rol_usuario_id", "id");
+        return $this->belongsToMany(Usuario::class, "usuario_tiene_rols")->using(UsuarioTieneRol::class);
     }
 }

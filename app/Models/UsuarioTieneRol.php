@@ -4,15 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class DocModalidad extends Pivot
+class UsuarioTieneRol extends Pivot
 {
     use HasFactory;
-
+    protected $table = 'usuario_tiene_rols';
     public $incrementing = true;
     public $timestamps = true;
-    protected $table = 'doc_modalidads';
-
 }
