@@ -19,7 +19,6 @@
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <link href="css/tablas.css" rel="stylesheet" />
-    <link href="css/tablaAlumnos.css" rel="stylesheet" />
     <script src="../js/importarLIstaAlumnos.js"></script>
     @stack('styles')
 </head>
@@ -59,10 +58,10 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 <td>{{ $usuario->matricula }}</td>
-                                <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
+                                <td>{{ $usuario->nombreUsuario . ' ' . $usuario->apellido }}</td>
                                 <td>{{ $usuario->proyecto }}</td>
                                 <td>{{ $usuario->director }}</td>
-                                <td>{{ $usuario->estatus_id }}</td>
+                                <td>{{ $usuario->nombreEstatus }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#editarEstudianteModal{{ $usuario->id }}"

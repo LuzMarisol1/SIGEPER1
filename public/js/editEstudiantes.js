@@ -55,7 +55,7 @@ $(document).ready(function() {
             e.preventDefault();
         });
 
-        proyectoinput.on('paste', function(e) {
+        tituloProyecto.on('paste', function(e) {
             e.preventDefault();
         });
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
                 toastr.warning('Se ha alcanzado el límite de caracteres permitidos');
             }
         });
-        $('#proyectoinput, #directorProyecto').on('input', function() {
+        $('#tituloProyecto, #directorProyecto').on('input', function() {
             $(this).val($(this).val().replace(/[^a-zA-Z\s]/g, ''));
         });
 
