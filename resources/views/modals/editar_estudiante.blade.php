@@ -29,10 +29,12 @@
                                 Inscripción</option>
                             <option value="2" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
                                 Inscripción Continuidad</option>
-                            <option value="3" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
-                                Inscripción</option>
+                            <option value="3" {{ $usuario->tipo_inscripcion_id == 2 ? 'selected' : '' }}>
+                                Continuidad</option>
                             <option value="4" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
-                                Inscripción (Continuidad)</option>
+                                Inscripción</option>
+                            <option value="5" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
+                                Inscripción</option>
                         </select>
                     </div>
                     <div class="mb-3">
