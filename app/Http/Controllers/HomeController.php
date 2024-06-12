@@ -38,11 +38,8 @@ class HomeController extends Controller
    
     public function viewTablaEstudiantes(Request $request){
 
-        $usuarios = DB::table('usuario_e_r_s')->get();
-     /*  $usuarios = Usuario_e_r::join('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
-        ->select('usuario_e_r_s.id', 'usuario_e_r_s.nombre AS nombreUsuario', 'usuario_e_r_s.apellido', 'usuario_e_r_s.matricula', 'estatuses.nombre AS nombreEstatus, usuario_e_r_s.proyecto, usuario_e_r_s.director, usuario_e_r_S.tipo_inscripcion_id, usuario_e_r_s.modalidad_id,')
-        ->get();
-*/
+       $usuarios = DB::table('usuario_e_r_s')->get();
+     
         return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
   
