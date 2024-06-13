@@ -68,7 +68,19 @@
                                 </div>
                             @endfor
                         </div>
-                       <!-- <div class="col-md-4">
+                        <div class="col-md-4">
+                            @for ($i = 1; $i <= 12; $i++)
+                                <div class="mb-3">
+                                    <select class="form-select" id="documento{{ $i }}" name="documento{{ $i }}" disabled>
+                                        <option value="">Seleccionar</option>
+                                        <option value="aprobado" selected>Pendiente</option>
+                                        <option value="aprobado">Aprobado</option>
+                                        <option value="rechazado">Rechazado</option>
+                                    </select>
+                                </div>
+                            @endfor
+                        </div>
+                        <!-- <div class="col-md-4">
                             <div class="mb-3">
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" value="1"
