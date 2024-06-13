@@ -23,6 +23,9 @@ use App\Http\Controllers\UsuarioController;
 Route::get('/', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->middleware('auth')->name('home');
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+
+//estudiante
+Route::get('/EstudianteER', 'App\Http\Controllers\UsuarioERController@informacionAlumnos');
 /*Route::get('/', function () {
     return view('tablaAlumnos');
 });
@@ -43,3 +46,5 @@ Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name(
 Route::get('/ImportarListaAlumnos', 'App\Http\Controllers\HomeController@ImportarListaExcel');
 Route::post('/import-csv', 'App\Http\Controllers\HomeController@import')->name('import-csv');
 Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@eliminar');
+
+

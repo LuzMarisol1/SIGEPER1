@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\UsuarioER;
 use App\Http\Requests\StoreUsuarioERRequest;
 use App\Http\Requests\UpdateUsuarioERRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioERController extends Controller
 {
@@ -13,10 +15,17 @@ class UsuarioERController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function informacionAlumnos(Request $request)
     {
-        //
+        $estudiantes = DB::select("
+        SELECT usuario_e_r_s.id, usuario_e_r_s.nombre AS nombreUsuario, usuario_e_r_s.apellido, usuario_e_r_s.matricula, estatuses.nombre AS nombreEstatus, usuario_e_r_s.proyecto, usuario_e_r_s.director, usuario_e_r_s.tipo_inscripcion_id, usuario_e_r_s.modalidad_id, usuario_e_r_s.estatus_id
+        FROM usuario_e_r_s
+        LEFT JOIN estatuses ON usuario_e_r_s.estatus_id = estatuses.id
+    ");
+        return view('informaciónEstudiante', ['estudiantes' => $estudiantes]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.

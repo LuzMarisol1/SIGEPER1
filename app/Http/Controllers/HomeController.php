@@ -44,8 +44,7 @@ class HomeController extends Controller
        FROM usuario_e_r_s
        LEFT JOIN estatuses ON usuario_e_r_s.estatus_id = estatuses.id
    ");
-   
-   
+
         return view('tablaAlumnos', ['usuarios' => $usuarios]);
     }
 

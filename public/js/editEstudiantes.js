@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var tablAlumnos = new DataTable('#tablAlumnos', {
         order: [
-            [3, 'desc']
+            [3, 'asc']
         ],
         searching: true,
         pagingType: 'simple_numbers',

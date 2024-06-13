@@ -68,7 +68,6 @@
                         </select>
                     </div>
             </div>
-
             </form>
 
             <div id="botonesEdit" class="modal-footer">
