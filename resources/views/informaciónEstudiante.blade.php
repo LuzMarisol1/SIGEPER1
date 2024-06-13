@@ -80,7 +80,7 @@
                                 </td>
                             </tr>
                            
-                            @include('modals.subirDocumentosModal', ['estudiante' => $estudiante])
+                            @include('modals.documentosExamenProfesional', ['estudiante' => $estudiante])
                         @endforeach
                     </tbody>
                 </table>
