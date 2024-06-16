@@ -1,13 +1,9 @@
 $(document).ready(function() {
-    //función para abrir el modal
-    new DataTable('#tablAlumnos', {
+    $('#tablAlumnos').DataTable({
         order: [
             [3, 'desc']
         ],
-
-        Buscar: {
-            return: true
-        },
+        searching: true,
         pagingType: 'simple_numbers',
         language: {
             search: 'Buscar:',
@@ -16,6 +12,20 @@ $(document).ready(function() {
             infoFiltered: '(filtrado de un total de _MAX_ registros)',
             lengthMenu: 'Mostrar _MENU_ registros por página',
             zeroRecords: 'No existen resultados'
+        },
+        dom: '<"row"<"col-sm-12 col-md-6"f><"col-sm-12 col-md-6 button-container"B>>rt<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"l>>',
+        lengthMenu: [10, 25, 50, 100],
+        buttons: [{
+            extend: 'excel',
+            text: '<i class="fas fa-file-excel"></i> Exportar a Excel',
+            className: 'btn btn-success',
+            exportOptions: {
+                columns: ':visible'
+            }
+        }],
+        initComplete: function() {
+            $('.dataTables_filter input[type="search"]').addClass('form-control form-control-sm');
+            $('.dataTables_length select').addClass('form-select form-select-sm');
         }
     });
 

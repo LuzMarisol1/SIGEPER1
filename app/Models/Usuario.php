@@ -31,4 +31,8 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(UsuarioER::class, "usuario_id", "id");
     }
+    public function estudianteER()
+    {
+        return $this->hasOne(UsuarioER::class, 'usuario_id');
+    }
 }

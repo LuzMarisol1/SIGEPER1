@@ -60,29 +60,46 @@
                             <th>Proyecto</th>
                             <th>Director</th>
                             <th>Estatus</th>
-                            <th class="text-center" style="width:100px;">Acciones</th>
+                            <th class="text-center" style="width:100px;">Subir Documentos</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($estudiantes as $estudiante)
+                    @if (!empty($estudiantes))
+                        <tbody>
+                            @foreach ($estudiantes as $estudiante)
+                                @if ($estudiante)
+                                    <tr>
+                                        <td>{{ $estudiante->matricula ?? '' }}</td>
+                                        <td>{{ ($estudiante->nombreUsuario ?? '') . ' ' . ($estudiante->apellido ?? '') }}
+                                        </td>
+                                        <td>{{ $estudiante->proyecto ?? '' }}</td>
+                                        <td>{{ $estudiante->director ?? '' }}</td>
+                                        <td>{{ $estudiante->nombreEstatus ?? '' }}</td>
+                                        <td>
+                                            @if ($estudiante->matricula)
+                                                <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#subirDocumentosModal{{ $estudiante->matricula }}"
+                                                    title="Editar estudiante">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                    @if ($estudiante->matricula)
+                                        @include('modals.documentosExamenProfesional', [
+                                            'estudiante' => $estudiante,
+                                        ])
+                                    @endif
+                                @endif
+                            @endforeach
+                        </tbody>
+                    @else
+                        <tbody>
                             <tr>
-                                <td>{{ $estudiante->matricula }}</td>
-                                <td>{{ $estudiante->nombreUsuario . ' ' . $estudiante->apellido }}</td>
-                                <td>{{ $estudiante->proyecto }}</td>
-                                <td>{{ $estudiante->director }}</td>
-                                <td>{{ $estudiante->nombreEstatus }}</td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#subirDocumentosModal{{ $estudiante->id }}".
-                                        title="Editar estudiante">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
+                                <td colspan="6">No se encontró información del estudiante.</td>
                             </tr>
-                           
-                            @include('modals.documentosExamenProfesional', ['estudiante' => $estudiante])
-                        @endforeach
-                    </tbody>
+                        </tbody>
+                    @endif
                 </table>
             </div>
         </div>

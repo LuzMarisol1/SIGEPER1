@@ -17,4 +17,11 @@ class RolUsuario extends Model
     {
         return $this->belongsToMany(Usuario::class, "usuario_tiene_rols")->using(UsuarioTieneRol::class);
     }
+
+    public function index()
+{
+    $rolUsuarios  = RolUsuario::all();
+    
+    return view('tablaAlumnos', ['usuarios' => $usuarios, 'rolUsuarios ' => $rolUsuarios ]);
+}
 }

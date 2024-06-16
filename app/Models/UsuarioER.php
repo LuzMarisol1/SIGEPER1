@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
 class UsuarioER extends Model
 {
     use HasFactory;
@@ -24,7 +25,9 @@ class UsuarioER extends Model
     public function documentos(): HasMany
     {
         return $this->hasMany(Documentos::class, "usuario_e_r_id", "id");
+       
     }
+   
 
     public function ER(): BelongsTo
     {

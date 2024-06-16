@@ -28,14 +28,13 @@ return new class extends Migration
             $table->unsignedBigInteger('tipo_inscripcion_id')->nullable();
             $table->foreign('tipo_inscripcion_id')->references('id')->on('estatuses')->onDelete('set null');
             $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('set null');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('set null');
             $table->unsignedBigInteger('modalidad_id')->nullable();
             $table->foreign('modalidad_id')->references('id')->on('modalidads')->onDelete('set null');
             $table->unsignedBigInteger('catalogo_semestre_id')->nullable();
             $table->foreign('catalogo_semestre_id')->references('id')->on('catalogo_semestres')->onDelete('set null');
         });
     }
-
     /**
      * Reverse the migrations.
      *

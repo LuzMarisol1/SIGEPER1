@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\ConfirmacionRegistro;
 class AuthController extends Controller {
 
     public function login() {
@@ -29,6 +29,7 @@ class AuthController extends Controller {
             'correo' => 'Las credenciales no coinciden con nuestros registros.',
         ])->onlyInput('email');
     }
+
 
     public function logout(): RedirectResponse
     {
