@@ -69,16 +69,13 @@
                     <button style="background-color: #28ad56; font-size: 14px; padding: 8px 16px;"
                         id="botonIniciarsesión" type="submit">Iniciar Sesión</button>
                 </form>
-                <div class="text-wrapper-6">
-                    <a href="">¿Problemas para ingresar?</a>
-                </div>
+            
 
-                <div class="overlap-4">
-
+              <!--  <div class="overlap-4">
                     <button style="background-color: #18529d; font-size: 14px; padding: 8px 16px;"
                         data-bs-toggle="modal" data-bs-target="#modalRegistro"id="botonCrearCuenta" type="submit">Crear
                         Cuenta</button>
-                </div>
+                </div>-->
 
                 <!-- Modal de Registro -->
                 <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel"

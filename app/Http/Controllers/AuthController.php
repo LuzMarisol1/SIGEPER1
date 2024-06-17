@@ -22,8 +22,20 @@ class AuthController extends Controller {
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            // Verificar si el usuario tiene el rol "Alumno"
+        if (Auth::user()->hasRole('Alumno')) {
+            return redirect()->route('EstudianteER');
+        } else {
             return redirect()->intended('/');
         }
+
+        if(Auth::user()->hasRole('Coordinador') || Auth::user()->hasRole('admin')){
+            return redirect()->route('InfEstudiantes');
+        }else{
+            return redirect()->intended('/');
+        }
+    }
+        
 
         return back()->withErrors([
             'correo' => 'Las credenciales no coinciden con nuestros registros.',

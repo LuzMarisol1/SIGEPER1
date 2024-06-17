@@ -22,6 +22,7 @@
     <!--PERSONALIZADO-->
     <link href="css/tablas.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="../js/accionesUsuario.js"></script>
     
     <title>Usuarios</title>
     <style>
@@ -97,7 +98,6 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,11 +105,7 @@
                     <tr>
                         <td>{{ $usuario->nombre }}</td>
                         <td>{{ $usuario->correo }}</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal{{ $usuario->id }}">
-                                <i class="bi bi-pencil-square"></i> Editar
-                            </a>
-                        </td>
+                        
                     </tr>
 
                     <!-- Modal -->
