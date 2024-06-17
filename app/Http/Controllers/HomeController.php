@@ -41,10 +41,7 @@ class HomeController extends Controller
 
     public function viewTablaEstudiantes(Request $request)
     {
-        $user = auth()->user();
-        if ($user->roles->contains("nombre", "Alumno")) {
-            return redirect()->route("home_alumno");
-        }
+      
         /* $usuarios = DB::table('usuario_e_r_s')->get();*/
     //     $usuarios = DB::select("
     //    SELECT usuario_e_r_s.id, usuario_e_r_s.nombre AS nombreUsuario, usuario_e_r_s.apellido, usuario_e_r_s.matricula, estatuses.nombre AS nombreEstatus, usuario_e_r_s.proyecto, usuario_e_r_s.director, usuario_e_r_s.tipo_inscripcion_id, usuario_e_r_s.modalidad_id, usuario_e_r_s.estatus_id

@@ -28,7 +28,10 @@ class Usuario extends Authenticatable
     {
         return $this->belongsToMany(RolUsuario::class, "usuario_tiene_rols")->using(UsuarioTieneRol::class);
     }
-
+    public function hasRole($role)
+    {
+    return $this->roles()->where('nombre', $role)->exists();
+    }
     public function usuarioERs(): HasMany
     {
         return $this->hasMany(UsuarioER::class, "usuario_id", "id");

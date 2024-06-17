@@ -51,3 +51,9 @@ Route::post('/import-csv', 'App\Http\Controllers\HomeController@import')->name('
 Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@eliminar');
 
 
+
+Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->name('InfEstudiantes');
+
+
+Route::get('/EstudianteER', 'App\Http\Controllers\UsuarioERController@informacionAlumnos')->name('EstudianteER');
+

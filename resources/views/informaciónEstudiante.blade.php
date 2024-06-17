@@ -96,18 +96,27 @@
                                             @if ($estudiante->matricula)
                                                 <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#subirDocumentosModal{{ $estudiante->matricula }}"
-                                                    title="Editar proyecto">
+                                                    title="Editar estudiante">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                             @endif
                                         </td>
                                     </tr>
-
                                     @if ($estudiante->matricula)
+                                    @if ($estudiante->modalidad_id == 1)
                                         @include('modals.documentosExamenProfesional', [
                                             'estudiante' => $estudiante,
                                         ])
+                                    @elseif ($estudiante->modalidad_id == 2)
+                                        @include('modals.docsExamenCENEVAL', [
+                                            'estudiante' => $estudiante,
+                                        ])
+                                    @elseif ($estudiante->modalidad_id == 3)
+                                        @include('modals.docsPromedio', [
+                                            'estudiante' => $estudiante,
+                                        ])
                                     @endif
+                                @endif
                                 @endif
                             @endforeach
                         </tbody>

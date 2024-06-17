@@ -22,39 +22,38 @@ class UsuarioERController extends Controller
     public function informacionAlumnos(Request $request)
     {
         $usuario = auth()->user();
-
+        
         // Imprimir el objeto $usuario completo
         //dd($usuario);
-
-        // $matricula = explode('@', $usuario->correo)[0];
-        $matricula = $usuario->matricula;
+        
+        $matricula = explode('@', $usuario->correo)[0];
         // Imprimir la matrícula extraída
-        //  dd($matricula);
-
-        $estudianteER = UsuarioER::select(
-            'usuario_e_r_s.id',
-            'usuario_e_r_s.nombre AS nombreUsuario',
-            'usuario_e_r_s.apellido',
-            'usuario_e_r_s.matricula',
-            'estatuses.nombre AS nombreEstatus',
-            'usuario_e_r_s.proyecto',
-            'usuario_e_r_s.director',
-            'usuario_e_r_s.tipo_inscripcion_id',
-            'usuario_e_r_s.modalidad_id',
-            'usuario_e_r_s.estatus_id'
-        )
-            ->leftJoin('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
-            ->whereRaw('LOWER(usuario_e_r_s.matricula) LIKE ?', ['%' . strtolower($matricula) . '%'])
-            ->first();
-
+      //  dd($matricula);
+        
+      $estudianteER = UsuarioER::select(
+        'usuario_e_r_s.id',
+        'usuario_e_r_s.nombre AS nombreUsuario',
+        'usuario_e_r_s.apellido',
+        'usuario_e_r_s.matricula',
+        'estatuses.nombre AS nombreEstatus',
+        'usuario_e_r_s.proyecto',
+        'usuario_e_r_s.director',
+        'usuario_e_r_s.tipo_inscripcion_id',
+        'usuario_e_r_s.modalidad_id',
+        'usuario_e_r_s.estatus_id'
+    )
+    ->leftJoin('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
+    ->where('usuario_e_r_s.matricula', $matricula)
+    ->first();
+        
         if ($estudianteER) {
             $estudiantes = [$estudianteER];
             // Imprimir el objeto $estudianteER después de aplicar el filtro
-            // dd($estudianteER);
+           // dd($estudianteER);
         } else {
             $estudiantes = [];
         }
-
+        
         return view('informaciónEstudiante', ['estudiantes' => $estudiantes]);
     }
 

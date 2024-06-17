@@ -23,6 +23,8 @@ class UsuarioSeeder extends Seeder
         ) {
             $admin = new Usuario();
             $admin->nombre = "admin";
+            $admin->apellidos = "admin";
+            $admin->matricula = "zs18967888";
             $admin->correo = "admin@example.com";
             $admin->password = Hash::make("admin");
             $rol = RolUsuario::where("nombre", "admin")->first();
