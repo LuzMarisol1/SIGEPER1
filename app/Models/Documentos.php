@@ -12,7 +12,9 @@ class Documentos extends Model
     protected $fillable = [
         "nombre",
         "estatus",
-        "archivo"
+        "numero_de_documento",
+        "ruta",
+        "usuario_e_r_id",
     ];
 
     public function tipo(): BelongsTo

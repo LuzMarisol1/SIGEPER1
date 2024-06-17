@@ -18,33 +18,25 @@
                     <div class="mb-3">
                         <label for="tituloProyecto" class="campoTitulo">Nombre</label>
                         <input type="text" class="form-control" id="nombre"
-                            value="{{ $usuario->nombreUsuario . ' ' . $usuario->apellido }}" readonly
+                            value="{{ $usuario->nombre . ' ' . $usuario->apellido }}" readonly
                             style="background-color: #e9ecef; color: #495057;">
                     </div>
                     <div id="tipoInscripcion" class="mb-3">
                         <label class="form-label">Tipo de inscripción</label>
                         <select id="selectTipoInscripcion" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
-                            <option value="1" {{ $usuario->tipo_inscripcion_id == 1 ? 'selected' : '' }}>Primera
-                                Inscripción</option>
-                            <option value="2" {{ $usuario->tipo_inscripcion_id == 2 ? 'selected' : '' }}>Primera
-                                Inscripción Continuidad</option>
-                            <option value="3" {{ $usuario->tipo_inscripcion_id == 3 ? 'selected' : '' }}>Segunda
-                                Inscripción</option>
-                            <option value="4" {{ $usuario->tipo_inscripcion_id == 4 ? 'selected' : '' }}>Segunda
-                                Inscripción Continuidad</option>
+                            @foreach ($tipos_inscripcion as $option)
+                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Modalidad</label>
                         <select id="selectModalidad" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
-                            <option value="1" {{ $usuario->modalidad_id == 1 ? 'selected' : '' }}>Trabajo
-                                Recepcional</option>
-                            <option value="2" {{ $usuario->modalidad_id == 2 ? 'selected' : '' }}>Examen CENEVAL
-                            </option>
-                            <option value="3" {{ $usuario->modalidad_id == 3 ? 'selected' : '' }}>Promedio
-                            </option>
+                            @foreach ($modalidades as $option)
+                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -62,8 +54,9 @@
                         <label class="form-label">Estatus</label>
                         <select id="selectEstatus" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
-                            <option value="1" {{ $usuario->estatus_id == 1 ? 'selected' : '' }}>Activo</option>
-                            <option value="2" {{ $usuario->estatus_id == 2 ? 'selected' : '' }}>Inactivo</option>
+                            @foreach ($estatuses as $option)
+                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                            @endforeach
                             <!-- Agrega más opciones según tus requisitos -->
                         </select>
                     </div>

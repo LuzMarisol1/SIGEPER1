@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RolUsuarioSeeder::class);
         $this->call(UsuarioSeeder::class);
+        $this->call(EstatusSeeder::class);
+        $this->call(ModalidadSeeder::class);
+        $this->call(TipoInscripcionSeeder::class);
     }
 }

@@ -57,6 +57,8 @@ class UsuarioController extends Controller
         $usuario = new Usuario();
         $usuario->nombre = $validated["nombre"];
         $usuario->correo = $validated["correo"];
+        $usuario->apellidos = $validated["apellidos"];
+        $usuario->matricula = $validated["matricula"];
         $usuario->password = Hash::make($validated["password"]);
         $usuario->save();
         $usuario->roles()->sync($validated["rol_usuario_id"]);

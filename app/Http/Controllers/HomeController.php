@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estatus;
+use App\Models\Modalidad;
+use App\Models\TipoInscripcion;
 use Illuminate\Http\Request;
 use App\Models\UsuarioER;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -14,7 +17,7 @@ class HomeController extends Controller
 {
 
 
-/*public function register(Request $request)
+    /*public function register(Request $request)
 {
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
@@ -36,20 +39,35 @@ class HomeController extends Controller
     }*/
 
 
-    public function viewTablaEstudiantes(Request $request){
+    public function viewTablaEstudiantes(Request $request)
+    {
+        $user = auth()->user();
+        if ($user->roles->contains("nombre", "Alumno")) {
+            return redirect()->route("home_alumno");
+        }
+        /* $usuarios = DB::table('usuario_e_r_s')->get();*/
+    //     $usuarios = DB::select("
+    //    SELECT usuario_e_r_s.id, usuario_e_r_s.nombre AS nombreUsuario, usuario_e_r_s.apellido, usuario_e_r_s.matricula, estatuses.nombre AS nombreEstatus, usuario_e_r_s.proyecto, usuario_e_r_s.director, usuario_e_r_s.tipo_inscripcion_id, usuario_e_r_s.modalidad_id, usuario_e_r_s.estatus_id
+    //         FROM usuario_e_r_s
+    //         LEFT JOIN estatuses ON usuario_e_r_s.estatus_id = estatuses.id
+    //     ");
+        $usuarios = UsuarioER::all();
+        $modalidades = Modalidad::all();
+        $estatuses = Estatus::all();
+        $tipos_inscripcion = TipoInscripcion::all();
 
-       /* $usuarios = DB::table('usuario_e_r_s')->get();*/
-       $usuarios = DB::select("
-       SELECT usuario_e_r_s.id, usuario_e_r_s.nombre AS nombreUsuario, usuario_e_r_s.apellido, usuario_e_r_s.matricula, estatuses.nombre AS nombreEstatus, usuario_e_r_s.proyecto, usuario_e_r_s.director, usuario_e_r_s.tipo_inscripcion_id, usuario_e_r_s.modalidad_id, usuario_e_r_s.estatus_id
-       FROM usuario_e_r_s
-       LEFT JOIN estatuses ON usuario_e_r_s.estatus_id = estatuses.id
-   ");
 
-        return view('tablaAlumnos', ['usuarios' => $usuarios]);
+        return view('tablaAlumnos', [
+            'usuarios' => $usuarios,
+            'modalidades' => $modalidades,
+            'estatuses' => $estatuses,
+            'tipos_inscripcion' => $tipos_inscripcion,
+        ]);
     }
 
 
-    public function registrarUsuario(Request $request){
+    public function registrarUsuario(Request $request)
+    {
         return view('crearCuenta');
     }
     public function actualizarInfo(Request $request)
@@ -98,11 +116,12 @@ class HomeController extends Controller
         $usuario = UsuarioER::findOrFail($id);
         $usuario->delete();
 
-    return response()->json(['message' => 'Registro eliminado correctamente']);
-}
+        return response()->json(['message' => 'Registro eliminado correctamente']);
+    }
 
-    public function ImportarListaExcel(Request $request){
-        return view ('ImportarListaAlumnos');
+    public function ImportarListaExcel(Request $request)
+    {
+        return view('ImportarListaAlumnos');
     }
 
     public function import(Request $request)

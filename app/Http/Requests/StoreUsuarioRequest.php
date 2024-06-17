@@ -25,6 +25,8 @@ class StoreUsuarioRequest extends FormRequest
     {
         return [
             "nombre" => ["required", "string", "max:255"],
+            "apellidos" => ["required", "string", "max:255"],
+            "matricula" => ["string", "max:10"],
             "correo" => ["required", "string", "email", "max:255", "unique:usuarios"],
             "password" => ["required", "string", "min:8", "confirmed"],
             "rol_usuario_id" => ["required", "array"],

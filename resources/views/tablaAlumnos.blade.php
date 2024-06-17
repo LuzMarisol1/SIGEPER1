@@ -79,6 +79,7 @@
                             <th>Proyecto</th>
                             <th>Director</th>
                             <th>Estatus</th>
+                            <th>Documentos</th>
                             <th class="text-center" style="width:100px;">Acciones</th>
                         </tr>
                     </thead>
@@ -86,10 +87,24 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 <td>{{ $usuario->matricula }}</td>
-                                <td>{{ $usuario->nombreUsuario . ' ' . $usuario->apellido }}</td>
+                                <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
                                 <td>{{ $usuario->proyecto }}</td>
                                 <td>{{ $usuario->director }}</td>
-                                <td>{{ $usuario->nombreEstatus }}</td>
+                                <td>{{ $usuario->estatus ? $usuario->estatus->nombre : "" }}</td>
+                                <td>
+                                    @if ($usuario->documentos->isEmpty())
+                                        <p></p>
+                                    @else
+                                        <ul>
+                                            @foreach ($usuario->documentos as $documento)
+                                                <strong>Nombre:</strong> {{ $documento->nombre }} <br>
+                                                <strong>Estatus:</strong> {{ $documento->estatus }} <br>
+                                                <strong>Número de Documento:</strong> {{ $documento->numero_de_documento }} <br>
+                                                <strong>Fecha de Subida:</strong> {{ $documento->created_at }} <br>
+                                                <strong><a href={{ route('downloadDocument', ['id' => $documento->id]) }} >Descargar</a></strong><br>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 <td>
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#editarEstudianteModal{{ $usuario->id }}"

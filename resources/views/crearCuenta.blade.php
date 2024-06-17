@@ -68,10 +68,38 @@
                                     <label for="name"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text"
-                                            class="form-control @error('name') is-invalid @enderror" name="nombre"
+                                        <input id="nombre" type="text"
+                                            class="form-control @error('nombre') is-invalid @enderror" name="nombre"
                                             value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
                                         @error('nombre')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="name" type="text"
+                                            class="form-control @error('apellidos') is-invalid @enderror" name="apellidos"
+                                            value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
+                                        @error('apellidos')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="matricula"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('Matrícula') }} (Estudiante)</label>
+                                    <div class="col-md-6">
+                                        <input id="matricula" type="text"
+                                            class="form-control @error('matricula') is-invalid @enderror" name="matricula"
+                                            value="{{ old('matricula') }}" required autocomplete="matricula" autofocus>
+                                        @error('matricula')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -110,7 +138,7 @@
                                     <label for="password_confirmation"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
                                     <div class="col-md-6">
-                                        <input id="password" type="password"
+                                        <input id="password_confirmation" type="password"
                                             class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
                                             required>
                                         @error('password_confirmation')
@@ -121,7 +149,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="role"
+                                    <label for="rol_usuario_id"
                                         class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
                                     <div class="col-md-6">
                                         <select multiple id="role" class="form-control @error('rol_usuario_id') is-invalid @enderror"
