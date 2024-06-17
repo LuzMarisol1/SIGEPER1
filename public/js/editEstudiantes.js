@@ -81,6 +81,16 @@ $(document).ready(function() {
             $(this).find('.modal-title').text('Nombre ' + dato.nombre);
         });
 
+        // Obtener todos los campos de entrada
+        const titulo = document.querySelectorAll('tituloProyecto');
+
+        // Agregar un evento 'input' a cada campo
+        inputs.forEach(input => {
+            input.addEventListener('tituloProyecto', () => {
+                // Eliminar espacios en blanco al inicio y al final del valor ingresado
+                input.value = input.value.trim();
+            });
+        });
 
         modalidad.change(function() {
             if ($(this).val() === '2') {
