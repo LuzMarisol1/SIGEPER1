@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var tablAlumnos = $('#tablAlumnos').DataTable({
-        dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>>' +
+        dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>' +
             '<"row"<"col-sm-12"tr>>' +
             '<"row"<"col-sm-5"i><"col-sm-7"p>>',
         order: [
@@ -25,7 +25,7 @@ $(document).ready(function() {
         },
         buttons: [{
             extend: 'excel',
-            text: '<i class="fas fa-file-excel" style="font-size: 1.5rem; color: green;"></i>'
+            text: '<i class="fas fa-file-excel" style="font-size: 1.5rem; color: green;"></i> <span style="color: #333333;">Reporte</span>'
         }],
         paging: true,
         pageLength: 10,

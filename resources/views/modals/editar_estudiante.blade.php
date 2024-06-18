@@ -3,14 +3,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editarEstudianteModalLabel">Editar Estudiante</h5>
+                <h3 class="modal-title" id="editarEstudianteModalLabel">Editar Estudiante</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="formEditar" method="POST" action="{{ route('actualizarInfo') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="tituloProyecto" class="campoTitulo d-none">matricula</label>
+                        <label for="lbelMatricula" class="campoTitulo d-none">matricula</label>
                         <input type="text" class="form-control d-none" id="matricula"
                             value="{{ $usuario->matricula }}" readonly
                             style="background-color: #e9ecef; color: #495057;">
@@ -40,7 +40,7 @@
                         </select>
                     </div>
                     <div class="mb-3" id="divTituloProyecto">
-                        <label for="tituloProyectos" class="tituloProyecto">Proyecto</label>
+                        <label class="proyecto">Proyecto</label>
                         <input id="tituloProyecto" type="text" class="form-control" value="{{ $usuario->proyecto }}">
                     </div>
 
