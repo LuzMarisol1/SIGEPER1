@@ -39,13 +39,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" id="divTituloProyecto">
                         <label for="tituloProyectos" class="tituloProyecto">Proyecto</label>
-                        <input id="tituloProyecto" type="text" class="form-control"
-                            value="{{ $usuario->proyecto }}">
+                        <input id="tituloProyecto" type="text" class="form-control" value="{{ $usuario->proyecto }}">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" id="divTituloDirector">
                         <label for="directorProyectos" class="form-label">Director</label>
                         <input id="directorProyecto" type="text" class="form-control" maxlength="255"
                             value="{{ $usuario->director }}">

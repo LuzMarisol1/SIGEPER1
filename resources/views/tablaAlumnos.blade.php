@@ -90,7 +90,7 @@
                                 <td>{{ $usuario->nombre . ' ' . $usuario->apellido }}</td>
                                 <td>{{ $usuario->proyecto }}</td>
                                 <td>{{ $usuario->director }}</td>
-                                <td>{{ $usuario->estatus ? $usuario->estatus->nombre : "" }}</td>
+                                <td>{{ $usuario->estatus ? $usuario->estatus->nombre : '' }}</td>
                                 <td>
                                     @if ($usuario->documentos->isEmpty())
                                         <p></p>
@@ -99,9 +99,11 @@
                                             @foreach ($usuario->documentos as $documento)
                                                 <strong>Nombre:</strong> {{ $documento->nombre }} <br>
                                                 <strong>Estatus:</strong> {{ $documento->estatus }} <br>
-                                                <strong>Número de Documento:</strong> {{ $documento->numero_de_documento }} <br>
+                                                <strong>Número de Documento:</strong>
+                                                {{ $documento->numero_de_documento }} <br>
                                                 <strong>Fecha de Subida:</strong> {{ $documento->created_at }} <br>
-                                                <strong><a href={{ route('downloadDocument', ['id' => $documento->id]) }} >Descargar</a></strong><br>
+                                                <strong><a
+                                                        href={{ route('downloadDocument', ['id' => $documento->id]) }}>Descargar</a></strong><br>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -124,7 +126,32 @@
             </div>
         </div>
     </div>
-
+    <script>
+        $(document).ready(function() {
+            $("#tituloProyectos").on("input", function() {
+                var proyecto = $(this).val().trim();
+                
+                if (proyecto === "") {
+                    $("#errorMessage").show();
+                } else {
+                    $("#errorMessage").hide();
+                }
+            });
+            
+            $("#guardarDatos").on("click", function() {
+                var proyecto = $("#tituloProyectos").val().trim();
+                
+                if (proyecto === "") {
+                    $("#errorMessage").show();
+                    $("#tituloProyectos").focus();
+                    return;
+                }
+                
+                // Aquí puedes realizar las acciones necesarias para guardar los datos
+                // utilizando el valor de "proyecto" sin espacios en blanco al inicio y al final
+            });
+        });
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/table2excel@1.0.4/dist/table2excel.min.js"></script>
@@ -132,6 +159,7 @@
     <script type="text/javascript" src="js/editEstudiantes.js"></script>
 
     @stack('scripts')
+
 </body>
 
 </html>

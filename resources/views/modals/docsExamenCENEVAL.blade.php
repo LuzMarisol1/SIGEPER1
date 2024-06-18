@@ -1,4 +1,5 @@
-<div class="modal fade" id="subirDocumentosModal{{ $estudiante->matricula }}" tabindex="-1" aria-labelledby="subirDocumentosLabel" aria-hidden="true">  
+<div class="modal fade" id="subirDocumentosModal{{ $estudiante->matricula }}" tabindex="-1"
+    aria-labelledby="subirDocumentosLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,8 +7,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             
-                <form id="formEditar" method="POST" action="{{ route('actualizarInfo') }}">
+
+                <form id="formEditar" method="POST" action="{{ route('uploadDocuments') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-4">
@@ -37,7 +39,6 @@
                             <div class="mb-3">
                                 <label for="tituloProyecto" class="campoTitulo">Resultados CENEVAL </label>
                             </div>
-
                         </div>
                         <div class="col-md-4">
                             @for ($i = 1; $i <= 6; $i++)
@@ -50,7 +51,8 @@
                         <div class="col-md-4">
                             @for ($i = 1; $i <= 6; $i++)
                                 <div class="mb-3">
-                                    <select class="form-select" id="documento{{ $i }}" name="documento{{ $i }}" disabled>
+                                    <select class="form-select" id="documento{{ $i }}"
+                                        name="documento{{ $i }}" disabled>
                                         <option value="Pendiente" selected>Pendiente</option>
                                         <option value="Aprobado">Aprobado</option>
                                         <option value="Rechazado">Rechazado</option>

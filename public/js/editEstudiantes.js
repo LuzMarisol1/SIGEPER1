@@ -42,6 +42,7 @@ $(document).ready(function() {
     });
 
     $(document).on('shown.bs.modal', '.modal', function() {
+
         var modal = $(this);
         //var directorProyectoInput = modal.find('#directorProyecto');
         var tituloProyecto = modal.find("#tituloProyecto");
@@ -49,6 +50,40 @@ $(document).ready(function() {
         var maxWords = 20; // número máximo de palabras permitidas
         var maxCaracteres = 100; // número máximo de caracteres permitidos
         var modalidad = modal.find('#selectModalidad');
+        var divTituloProyecto = modal.find('#divTituloProyecto');
+        var divTituloDirector = modal.find('#divTituloDirector');
+
+
+        // Obtener la opción seleccionada en el campo "Modalidad"
+        var opcionSeleccionada = modalidad.val();
+
+        if (opcionSeleccionada === '2' || opcionSeleccionada === '3') {
+            tituloProyecto.hide();
+            proyectoinput.hide();
+            divTituloProyecto.hide();
+            divTituloDirector.hide(); // Ocultar el div
+        } else {
+            tituloProyecto.show();
+            proyectoinput.show();
+            divTituloProyecto.show();
+            divTituloDirector.show(); // Mostrar el div
+        }
+
+        // Agregar el controlador de eventos "change" al campo "Modalidad"
+        modalidad.on('change', function() {
+            opcionSeleccionada = $(this).val();
+            if (opcionSeleccionada === '2' || opcionSeleccionada === '3') {
+                tituloProyecto.hide();
+                proyectoinput.hide();
+                divTituloProyecto.hide();
+                divTituloDirector.hide(); // Ocultar el div
+            } else {
+                tituloProyecto.show();
+                proyectoinput.show();
+                divTituloProyecto.show();
+                divTituloDirector.show(); // Mostrar el div
+            }
+        });
 
         //Evitar el pegado de código en los inputs
         proyectoinput.on('paste', function(e) {
@@ -81,16 +116,6 @@ $(document).ready(function() {
             $(this).find('.modal-title').text('Nombre ' + dato.nombre);
         });
 
-        // Obtener todos los campos de entrada
-        const titulo = document.querySelectorAll('tituloProyecto');
-
-        // Agregar un evento 'input' a cada campo
-        inputs.forEach(input => {
-            input.addEventListener('tituloProyecto', () => {
-                // Eliminar espacios en blanco al inicio y al final del valor ingresado
-                input.value = input.value.trim();
-            });
-        });
 
         modalidad.change(function() {
             if ($(this).val() === '2') {
@@ -142,11 +167,17 @@ $(document).ready(function() {
         var matricula = modal.find('#matricula').val();
         var tipoInscripcionId = modal.find('#selectTipoInscripcion').val();
         var tituloProyecto = modal.find('#tituloProyecto');
-        var proyecto = modal.find('#tituloProyecto').val();
+        var proyecto = tituloProyecto.val().trim();
         var directorProyectoInput = modal.find('#directorProyecto');
         var modalidadId = modal.find('#selectModalidad').val();
-        var director = modal.find('#directorProyecto').val();
+        var director = directorProyectoInput.val().trim();
         var estatusId = modal.find('#selectEstatus').val();
+
+        if (proyecto.trim() === "") {
+            // El valor de "proyecto" contiene solo espacios en blanco
+            toastr.error("El campo Proyecto no puede contener solo espacios en blanco.");
+            return;
+        }
         if (proyecto == "" && !tituloProyecto.prop('disabled')) {
             toastr.error("El campo Proyecto no puede quedar vacío. Por favor ingrese información");
             return;
