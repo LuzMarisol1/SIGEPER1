@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
@@ -49,7 +49,7 @@
         <div id="divTablaalumnos" data-search="true" data-filter-control="true">
             <div class="container">
                 <h1 class="text-center">Proyectos de Experiencia Recepcional</h1>
-                <h3 class="text-center">Seguimiento de los proyectos de Experiencia Recepcional</h3>
+                <h2 class="text-center">Seguimiento de los proyectos de Experiencia Recepcional</h2>
 
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
@@ -58,7 +58,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="button-container">
                             <button id="importButton" class="btn btn-success">
-                                <i class="fas fa-file-excel"></i> Importar Lista
+                                <i class="fas fa-file-import"></i> Importar Lista
                             </button>
                         </div>
                     </div>
@@ -68,9 +68,7 @@
                     <div class="col-sm-12">
                         <div class="dataTables_filter"></div>
                     </div>
-                </div>
-
-
+                </div> 
                 <table id="tablAlumnos" class="display" style="width:100%">
                     <thead>
                         <tr>

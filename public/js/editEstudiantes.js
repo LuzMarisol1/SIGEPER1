@@ -1,13 +1,16 @@
 $(document).ready(function() {
-    var tablAlumnos = new DataTable('#tablAlumnos', {
+    var tablAlumnos = $('#tablAlumnos').DataTable({
+        dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>>' +
+            '<"row"<"col-sm-12"tr>>' +
+            '<"row"<"col-sm-5"i><"col-sm-7"p>>',
         order: [
-            [3, 'asc']
+            [0, 'asc']
         ],
         searching: true,
         pagingType: 'simple_numbers',
         language: {
             emptyTable: "No hay datos disponibles en la tabla",
-            search: 'Buscar:',
+            search: '<i class="fas fa-search"></i> Buscar:',
             info: 'Mostrando _START_ a _END_ de _TOTAL_ registros',
             infoEmpty: 'Mostrando 0 a 0 de 0 registros',
             infoFiltered: '(filtrado de un total de _MAX_ registros)',
@@ -20,17 +23,16 @@ $(document).ready(function() {
                 previous: 'Anterior'
             }
         },
-        dom: '<"dt-buttons"Bf><"clear">lirtp',
-        buttons: [
-            'excel'
-        ],
+        buttons: [{
+            extend: 'excel',
+            text: '<i class="fas fa-file-excel" style="font-size: 1.5rem; color: green;"></i>'
+        }],
         paging: true,
         pageLength: 10,
         autoWidth: true,
         columnDefs: [
             { orderable: false, targets: 5 }
         ]
-
     });
 
     var csrfToken = $('meta[name="csrf-token"]').attr('content');

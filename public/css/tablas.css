@@ -62,3 +62,8 @@
       background-color: #0069d9;
       border-color: #0062cc;
   }
+  
+  .espaciado {
+      margin-right: 10px;
+      margin-left: 10px;
+  }
