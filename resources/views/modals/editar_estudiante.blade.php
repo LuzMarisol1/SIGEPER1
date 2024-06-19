@@ -26,7 +26,10 @@
                         <select id="selectTipoInscripcion" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
                             @foreach ($tipos_inscripcion as $option)
-                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                                <option value="{{ $option->id }}"
+                                    {{ $usuario->tipo_inscripcion_id == $option->id ? 'selected' : '' }}>
+                                    {{ $option->nombre }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -35,13 +38,17 @@
                         <select id="selectModalidad" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
                             @foreach ($modalidades as $option)
-                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                                <option value="{{ $option->id }}"
+                                    {{ $usuario->modalidad_id == $option->id ? 'selected' : '' }}>
+                                    {{ $option->nombre }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3" id="divTituloProyecto">
                         <label class="proyecto">Proyecto</label>
-                        <input id="tituloProyecto" type="text" class="form-control" value="{{ $usuario->proyecto }}">
+                        <input id="tituloProyecto" type="text" class="form-control"
+                            value="{{ $usuario->proyecto }}">
                     </div>
 
                     <div class="mb-3" id="divTituloDirector">
@@ -54,7 +61,10 @@
                         <select id="selectEstatus" class="form-select" aria-label="Default select example">
                             <option value="">Seleccionar</option>
                             @foreach ($estatuses as $option)
-                                <option value="{{ $option->id }}">{{ $option->nombre }}</option>
+                                <option value="{{ $option->id }}"
+                                    {{ $usuario->estatus_id == $option->id ? 'selected' : '' }}>
+                                    {{ $option->nombre }}
+                                </option>
                             @endforeach
                             <!-- Agrega más opciones según tus requisitos -->
                         </select>

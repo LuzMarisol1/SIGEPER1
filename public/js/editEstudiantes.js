@@ -175,16 +175,16 @@ $(document).ready(function() {
         var director = directorProyectoInput.val().trim();
         var estatusId = modal.find('#selectEstatus').val();
 
-        if (proyecto.trim() === "") {
+        if (proyecto.trim() === "" && modalidadId !== '2' && modalidadId !== '3') {
             // El valor de "proyecto" contiene solo espacios en blanco
             toastr.error("El campo Proyecto no puede contener solo espacios en blanco.");
             return;
         }
-        if (proyecto == "" && !tituloProyecto.prop('disabled')) {
+        if (proyecto == "" && !tituloProyecto.prop('disabled') && modalidadId !== '2' && modalidadId !== '3') {
             toastr.error("El campo Proyecto no puede quedar vacío. Por favor ingrese información");
             return;
         }
-        if (director == "" && !directorProyectoInput.prop('disabled')) {
+        if (director == "" && !directorProyectoInput.prop('disabled') && modalidadId !== '2' && modalidadId !== '3') {
             toastr.error("El campo Director no puede quedar vacío. Por favor ingrese información");
             return;
         }
