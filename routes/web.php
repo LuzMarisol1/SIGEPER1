@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuarioERController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,9 @@ Route::get('/', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->mid
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 
+//Registro estudiante 
+Route::post('/registro', [UsuarioController::class, 'registro']);
+
 //estudiante
 Route::get('/EstudianteER', 'App\Http\Controllers\UsuarioERController@informacionAlumnos')->name('home_alumno')->middleware('auth');
 /*Route::get('/', function () {
@@ -36,16 +40,16 @@ Route::post('registro', [RegistroController::class], 'store');*/
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate')->middleware('guest');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-Route::get('/crearUsuario', [UsuarioController::class, 'create'])->name('crearUsuario')->middleware('auth');
+
 Route::post('/storeUsuario', [UsuarioController::class, 'store'])->name('storeUsuario');
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios')->middleware('auth');
+
 
 
 //TABLA ESTUDIANTES
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 Route::post('/actualizarInfo', [HomeController::class, 'actualizarInfo'])->name('actualizarInfo');
 Route::post('/uploadDocuments', [UsuarioERController::class, 'uploadDocuments'])->name('uploadDocuments');
-Route::get('/downloadDocument/{id}', [UsuarioERController::class, 'downloadDocument'])->name('downloadDocument')->middleware('auth');
+
 Route::get('/ImportarListaAlumnos', 'App\Http\Controllers\HomeController@ImportarListaExcel');
 Route::post('/import-csv', 'App\Http\Controllers\HomeController@import')->name('import-csv');
 Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@eliminar');
@@ -54,6 +58,11 @@ Route::delete('/eliminar-registro/{id}', 'App\Http\Controllers\HomeController@el
 
 Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->name('InfEstudiantes');
 
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios')->middleware('auth');
+Route::get('/crearUsuario', [UsuarioController::class, 'create'])->name('crearUsuario')->middleware('auth');
+//Route::get('/EstudianteER', 'App\Http\Controllers\UsuarioERController@informacionAlumnos')->name('EstudianteER')->middleware('auth');
+Route::get('/downloadDocument/{id}', [UsuarioERController::class, 'downloadDocument'])->name('downloadDocument')->middleware('auth');
 
-Route::get('/EstudianteER', 'App\Http\Controllers\UsuarioERController@informacionAlumnos')->name('EstudianteER');
-
+Route::get('/informacion-estudiante', [UsuarioERController::class, 'informacionAlumnos'])
+    ->middleware(['auth', 'check.matricula'])
+    ->name('informacion.estudiante');

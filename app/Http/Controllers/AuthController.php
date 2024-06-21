@@ -22,13 +22,19 @@ class AuthController extends Controller {
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Verificar si el usuario tiene el rol "Alumno"
+            $user = Auth::user();
+
+            /* Verificar si el usuario tiene el rol "Alumno"
         if (Auth::user()->hasRole('Alumno')) {
             return redirect()->route('EstudianteER');
         } else {
             return redirect()->intended('/');
+        }*/
+        //verificar si el usuario tiene matricula 
+         if($user->matricula){
+                return redirect()->route('informacion.estudiante');
         }
-
+            
         if(Auth::user()->hasRole('Coordinador') || Auth::user()->hasRole('admin')){
             return redirect()->route('InfEstudiantes');
         }else{

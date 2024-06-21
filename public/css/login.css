@@ -4,16 +4,16 @@ html {
     padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
+    position: relative;
 }
 
 .login-container {
     display: flex;
     height: 100%;
-    width: 100%;
 }
 
 .login-image {
-    flex: 1.5;
+    flex: 1;
     background-image: url('/img/SIGEPER(2).png');
     background-size: cover;
     background-position: center;
@@ -22,7 +22,6 @@ html {
 .login-form-container {
     flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 30px;
@@ -32,36 +31,109 @@ html {
 .login-form {
     max-width: 400px;
     width: 100%;
-}
-
-h1 {
     text-align: center;
 }
 
-input[type="text"],
-input[type="password"] {
+h1 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-control {
     width: 100%;
-    padding: 16px 24px;
-    margin: 12px 0;
-    display: inline-block;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-button {
-    background-color: #18529D;
-    color: white;
-    padding: 18px 24px;
-    margin: 12px 0;
+.btn {
+    padding: 12px 24px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
 }
 
-button:hover {
-    background-color: #28ad56;
+.btn-primary {
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #18529d;
+    color: white;
+}
+
+.error-message {
+    color: red;
+    background-color: #fdd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.university-text {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #18529d;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.text-wrapper-2 {
+    font-size: 65px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.password-toggle i {
+    font-size: 18px;
+}
+
+.password-toggle:hover {
+    color: #333;
 }
 
 @media (max-width: 768px) {
@@ -69,53 +141,74 @@ button:hover {
         flex-direction: column;
     }
     .login-image {
-        height: 300px;
+        height: 200px;
     }
     .login-form-container {
         padding: 20px;
     }
+    .text-wrapper-2 {
+        font-size: 36px;
+    }
 }
 
-.group {
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    background-color: #18529d;
-    padding: 5px;
-    border-radius: 5px;
+.modal-content {
+    border-radius: 10px;
 }
 
-.rectangle {
-    width: 100px;
-    height: 0px;
-    top: 0px;
-    /* Reducimos la altura del rectángulo */
+.modal-header {
+    background-color: #18529D;
+    border-bottom: none;
 }
 
-.text-wrapper {
-    color: white;
-    font-size: 20px;
-    text-align: center;
-    line-height: 100px;
-    line-height: 30px;
+.modal-title {
+    color: #ffffff;
 }
 
-.text-wrapper-2 {
+.modal-footer {
+    background-color: #18529D;
+    color: #fff;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.form-control {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.input-group-text {
+    font-size: 0.9rem;
+}
+
+.btn-width {
+    width: auto;
+    margin-right: 10px;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-toggle {
     position: absolute;
-    width: 485px;
-    height: 114px;
-    top: 37px;
-    left: 950px;
-    font-family: "Gill Sans-Bold", Helvetica;
-    font-weight: 700;
-    color: #000000;
-    font-size: 90px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
 }
 
-.text-wrapper-6 {
-    text-align: center;
+.password-toggle:hover {
+    color: #495057;
+}
+
+.form-control {
+    padding-right: 40px;
 }

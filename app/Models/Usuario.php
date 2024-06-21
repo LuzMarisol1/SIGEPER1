@@ -11,12 +11,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Usuario extends Authenticatable
 {
     use HasFactory;
+
+    protected $table = 'usuarios'; // Especifica el nombre de la tabla
     protected $fillable = [
-        "correo",
-        "password",
-        "nombre",
-        "apellidos",
-        "matricula",
+        'nombre',
+        'apellidos',
+        'matricula',
+        'correo',
+        'password',
     ];
 
     protected $hidden = [

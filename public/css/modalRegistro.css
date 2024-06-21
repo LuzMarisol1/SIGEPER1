@@ -1,0 +1,56 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+}
+
+.login-image {
+    flex: 1;
+    background: url('ruta_a_tu_imagen_institucional.jpg') center/cover no-repeat;
+}
+
+.login-form-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.login-form {
+    width: 80%;
+    max-width: 400px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.text-wrapper-2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00529b;
+    /* Color institucional de la UV */
+    margin-bottom: 1rem;
+}
+
+.university-text {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #00529b;
+    border-color: #00529b;
+}
+
+.btn-primary:hover {
+    background-color: #003d7a;
+    border-color: #003d7a;
+}

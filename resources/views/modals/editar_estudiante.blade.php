@@ -69,9 +69,8 @@
                             <!-- Agrega más opciones según tus requisitos -->
                         </select>
                     </div>
+                </form>
             </div>
-            </form>
-
             <div id="botonesEdit" class="modal-footer">
                 <button id="guardarDatos" type="button" class="btn btn-primary btn-guardar-datos">Guardar</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

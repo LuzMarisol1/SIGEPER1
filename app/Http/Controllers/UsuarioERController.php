@@ -19,43 +19,40 @@ class UsuarioERController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function informacionAlumnos(Request $request)
-    {
-        $usuario = auth()->user();
-        
-        // Imprimir el objeto $usuario completo
-        //dd($usuario);
-        
-        $matricula = explode('@', $usuario->correo)[0];
-        // Imprimir la matrícula extraída
-      //  dd($matricula);
-        
-      $estudianteER = UsuarioER::select(
-        'usuario_e_r_s.id',
-        'usuario_e_r_s.nombre AS nombreUsuario',
-        'usuario_e_r_s.apellido',
-        'usuario_e_r_s.matricula',
-        'estatuses.nombre AS nombreEstatus',
-        'usuario_e_r_s.proyecto',
-        'usuario_e_r_s.director',
-        'usuario_e_r_s.tipo_inscripcion_id',
-        'usuario_e_r_s.modalidad_id',
-        'usuario_e_r_s.estatus_id'
-    )
-    ->leftJoin('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
-    ->where('usuario_e_r_s.matricula', $matricula)
-    ->first();
-        
-        if ($estudianteER) {
-            $estudiantes = [$estudianteER];
-            // Imprimir el objeto $estudianteER después de aplicar el filtro
-           // dd($estudianteER);
-        } else {
-            $estudiantes = [];
+ 
+        public function __construct()
+        {
+            $this->middleware('auth');
+            $this->middleware('check.matricula');
         }
-        
-        return view('informaciónEstudiante', ['estudiantes' => $estudiantes]);
-    }
+    
+        public function informacionAlumnos(Request $request)
+        {
+            $usuario = auth()->user();
+            $matricula = $usuario->matricula;
+    
+            $estudianteER = UsuarioER::select(
+                'usuario_e_r_s.id',
+                'usuario_e_r_s.nombre AS nombreUsuario',
+                'usuario_e_r_s.apellido',
+                'usuario_e_r_s.matricula',
+                'estatuses.nombre AS nombreEstatus',
+                'usuario_e_r_s.proyecto',
+                'usuario_e_r_s.director',
+                'usuario_e_r_s.tipo_inscripcion_id',
+                'usuario_e_r_s.modalidad_id',
+                'usuario_e_r_s.estatus_id'
+            )
+            ->leftJoin('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
+            ->where('usuario_e_r_s.matricula', $matricula)
+            ->first();
+    
+            $estudiantes = $estudianteER ? [$estudianteER] : [];
+    
+            return view('informacionEstudiante', ['estudiantes' => $estudiantes]);
+        }
+    
+
 
     public function uploadDocuments(Request $request)
     {
