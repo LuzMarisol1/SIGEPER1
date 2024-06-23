@@ -42,7 +42,7 @@
                 <form action="{{ route('authenticate') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="username">Usuario/Matrícula</label>
+                        <label for="username">Correo Electrónico</label>
                         <input type="text" name="correo" id="correo" class="form-control" required>
                     </div>
                     <div class="form-group password-group">
