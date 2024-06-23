@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Documentos;
 use App\Http\Requests\StoreDocumentosRequest;
 use App\Http\Requests\UpdateDocumentosRequest;
+use App\Models\Documento;
+use App\Models\UsuarioER;
+use Illuminate\Http\Request;
 
 class DocumentosController extends Controller
 {
@@ -16,6 +19,34 @@ class DocumentosController extends Controller
     public function index()
     {
         //
+    }
+
+    public function projectDocuments(int $id_proyecto)
+    {
+
+        $proyecto = UsuarioER::find($id_proyecto);
+        if (!$proyecto) {
+            return redirect()->route('home')->with('error', 'No se encontró el proyecto');
+        }
+        $documentos = $proyecto->documentos;
+        $tipos_documento = Documentos::$tipos_documento_modalidad;
+        return view('documentosProyecto', compact('documentos', 'proyecto', 'tipos_documento'));
+    }
+
+    public function updateEstatus(Request $request) {
+        $data = $request->validate(
+            [
+                'id' => 'required|integer',
+                'estatus' => 'required|string'
+            ]
+        );
+        $documento = Documentos::find($data['id']);
+        if (!$documento) {
+            return redirect()->route('home')->with('error', 'No se encontró el documento');
+        }
+        $documento->estatus = $data['estatus'];
+        $documento->save();
+        return redirect()->route('documentos.proyecto', $documento->usuario_e_r_id)->with('success', 'Estatus actualizado');
     }
 
     /**

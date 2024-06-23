@@ -3,6 +3,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUsuarioRequest;
+use App\Http\Requests\UpdateUsuarioRequest;
+use App\Models\RolUsuario;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +35,7 @@ class UsuarioController extends Controller
 {
     Log::info('Iniciando proceso de registro', $request->all());
 
-    \Log::info('Datos recibidos:', $request->all());
+    Log::info('Datos recibidos:', $request->all());
 
     try {
         $validated = $request->validate([
@@ -85,13 +88,13 @@ class UsuarioController extends Controller
         ], 200);  // Asegúrate de que el código de estado sea 200 para éxito
 
     } catch (ValidationException $e) {
-        \Log::error('Error de validación:', $e->errors());
+        Log::error('Error de validación:', $e->errors());
         return response()->json([
             'message' => 'Error de validación',
             'errors' => $e->errors()
         ], 422);
     } catch (\Exception $e) {
-        \Log::error('Error inesperado:', ['message' => $e->getMessage()]);
+        Log::error('Error inesperado:', ['message' => $e->getMessage()]);
         return response()->json([
             'message' => 'Error inesperado al procesar la solicitud'
         ], 500);

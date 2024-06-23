@@ -68,7 +68,7 @@
                     <div class="col-sm-12">
                         <div class="dataTables_filter"></div>
                     </div>
-                </div> 
+                </div>
                 <table id="tablAlumnos" class="display" style="width:100%">
                     <thead>
                         <tr>
@@ -77,6 +77,7 @@
                             <th>Proyecto</th>
                             <th>Director</th>
                             <th>Estatus</th>
+                            <th>Modalidad</th>
                             <th>Documentos</th>
                             <th class="text-center" style="width:100px;">Acciones</th>
                         </tr>
@@ -89,21 +90,16 @@
                                 <td>{{ $usuario->proyecto }}</td>
                                 <td>{{ $usuario->director }}</td>
                                 <td>{{ $usuario->estatus ? $usuario->estatus->nombre : '' }}</td>
+                                <td>{{ $usuario->modalidad ? $usuario->modalidad->nombre : '' }}</td>
                                 <td>
                                     @if ($usuario->documentos->isEmpty())
                                         <p></p>
                                     @else
-                                        <ul>
-                                            @foreach ($usuario->documentos as $documento)
-                                                <strong>Nombre:</strong> {{ $documento->nombre }} <br>
-                                                <strong>Estatus:</strong> {{ $documento->estatus }} <br>
-                                                <strong>Número de Documento:</strong>
-                                                {{ $documento->numero_de_documento }} <br>
-                                                <strong>Fecha de Subida:</strong> {{ $documento->created_at }} <br>
-                                                <strong><a
-                                                        href={{ route('downloadDocument', ['id' => $documento->id]) }}>Descargar</a></strong><br>
-                                            @endforeach
-                                        </ul>
+                                    <strong>
+                                        <a href={{ route('documentos.proyecto', ['id_proyecto' => $usuario->id]) }}>
+                                            Ver documentos
+                                        </a>
+                                    </strong>
                                     @endif
                                 <td>
                                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
@@ -128,23 +124,23 @@
         $(document).ready(function() {
             $("#tituloProyectos").on("input", function() {
                 var proyecto = $(this).val().trim();
-                
+
                 if (proyecto === "") {
                     $("#errorMessage").show();
                 } else {
                     $("#errorMessage").hide();
                 }
             });
-            
+
             $("#guardarDatos").on("click", function() {
                 var proyecto = $("#tituloProyectos").val().trim();
-                
+
                 if (proyecto === "") {
                     $("#errorMessage").show();
                     $("#tituloProyectos").focus();
                     return;
                 }
-                
+
                 // Aquí puedes realizar las acciones necesarias para guardar los datos
                 // utilizando el valor de "proyecto" sin espacios en blanco al inicio y al final
             });

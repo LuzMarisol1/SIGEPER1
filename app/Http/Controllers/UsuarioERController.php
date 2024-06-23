@@ -19,18 +19,18 @@ class UsuarioERController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
- 
+
         public function __construct()
         {
             $this->middleware('auth');
             $this->middleware('check.matricula');
         }
-    
+
         public function informacionAlumnos(Request $request)
         {
             $usuario = auth()->user();
             $matricula = $usuario->matricula;
-    
+
             $estudianteER = UsuarioER::select(
                 'usuario_e_r_s.id',
                 'usuario_e_r_s.nombre AS nombreUsuario',
@@ -44,14 +44,14 @@ class UsuarioERController extends Controller
                 'usuario_e_r_s.estatus_id'
             )
             ->leftJoin('estatuses', 'usuario_e_r_s.estatus_id', '=', 'estatuses.id')
-            ->where('usuario_e_r_s.matricula', $matricula)
+            ->whereRaw('LOWER(usuario_e_r_s.matricula) LIKE ?', ['%' . strtolower($matricula) . '%'])
             ->first();
-    
+
             $estudiantes = $estudianteER ? [$estudianteER] : [];
-    
+
             return view('informacionEstudiante', ['estudiantes' => $estudiantes]);
         }
-    
+
 
 
     public function uploadDocuments(Request $request)
@@ -60,7 +60,7 @@ class UsuarioERController extends Controller
 
         $request->validate([
             'id' => 'required',
-            'documento_*' => 'file' // Adjust mime types and max size as needed
+            'documento_*' => 'file'
         ]);
 
         // Iterate through the possible document inputs
@@ -79,7 +79,7 @@ class UsuarioERController extends Controller
                     'usuario_e_r_id' => $id
                 ],[
                     'nombre' => $file->getClientOriginalName(),
-                    'estatus' => 'pendiente',
+                    'estatus' => 'Pendiente',
                     'numero_de_documento' => $i,
                     'ruta' => $filePath,
                     'usuario_e_r_id' => $id

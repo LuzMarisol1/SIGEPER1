@@ -60,6 +60,7 @@
                             <th>Proyecto</th>
                             <th>Director</th>
                             <th>Estatus</th>
+                            <th>Modalidad</th>
                             <th>Documentos</th>
                             <th class="text-center" style="width:100px;">Subir Documentos</th>
                         </tr>
@@ -75,21 +76,16 @@
                                         <td>{{ $estudiante->proyecto ?? '' }}</td>
                                         <td>{{ $estudiante->director ?? '' }}</td>
                                         <td>{{ $estudiante->nombreEstatus ?? '' }}</td>
+                                        <td>{{ $estudiante->modalidad ? $estudiante->modalidad->nombre : '' }}</td>
                                         <td>
-                                            @if($estudiante->documentos->isEmpty())
-                                                <p>No hay documentos disponibles.</p>
+                                            @if ($estudiante->documentos->isEmpty())
+                                                <p></p>
                                             @else
-                                                <ul>
-                                                    @foreach($estudiante->documentos as $documento)
-                                                        <li>
-                                                            <strong>Nombre:</strong> {{ $documento->nombre }} <br>
-                                                            <strong>Estatus:</strong> {{ $documento->estatus }} <br>
-                                                            <strong>Número de Documento:</strong> {{ $documento->numero_de_documento }} <br>
-                                                            <strong>Fecha de Subida:</strong> {{ $documento->created_at }} <br>
-                                                            <strong><a href={{ route('downloadDocument', ['id' => $documento->id]) }} >Descargar</a></strong><br>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                            <strong>
+                                                <a href={{ route('documentos.proyecto', ['id_proyecto' => $estudiante->id]) }}>
+                                                    Ver documentos
+                                                </a>
+                                            </strong>
                                             @endif
                                         </td>
                                         <td>
@@ -103,27 +99,27 @@
                                         </td>
                                     </tr>
                                     @if ($estudiante->matricula)
-                                    @if ($estudiante->modalidad_id == 1)
-                                        @include('modals.documentosExamenProfesional', [
-                                            'estudiante' => $estudiante,
-                                        ])
-                                    @elseif ($estudiante->modalidad_id == 2)
-                                        @include('modals.docsExamenCENEVAL', [
-                                            'estudiante' => $estudiante,
-                                        ])
-                                    @elseif ($estudiante->modalidad_id == 3)
-                                        @include('modals.docsPromedio', [
-                                            'estudiante' => $estudiante,
-                                        ])
+                                        @if ($estudiante->modalidad_id == 1)
+                                            @include('modals.documentosExamenProfesional', [
+                                                'estudiante' => $estudiante,
+                                            ])
+                                        @elseif ($estudiante->modalidad_id == 2)
+                                            @include('modals.docsExamenCENEVAL', [
+                                                'estudiante' => $estudiante,
+                                            ])
+                                        @elseif ($estudiante->modalidad_id == 3)
+                                            @include('modals.docsPromedio', [
+                                                'estudiante' => $estudiante,
+                                            ])
+                                        @endif
                                     @endif
-                                @endif
                                 @endif
                             @endforeach
                         </tbody>
                     @else
                         <tbody>
                             <tr>
-                                <td colspan="6">No se encontró información del estudiante.</td>
+                                <td colspan="8">No se encontraron proyectos del estudiante.</td>
                             </tr>
                         </tbody>
                     @endif

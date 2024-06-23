@@ -98,7 +98,7 @@
                                     <div class="col-md-6">
                                         <input id="matricula" type="text"
                                             class="form-control @error('matricula') is-invalid @enderror" name="matricula"
-                                            value="{{ old('matricula') }}" required autocomplete="matricula" autofocus>
+                                            value="{{ old('matricula') }}" autocomplete="matricula" autofocus>
                                         @error('matricula')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

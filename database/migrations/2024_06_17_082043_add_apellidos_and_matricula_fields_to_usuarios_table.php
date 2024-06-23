@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::table('usuarios', function (Blueprint $table) {
             $table->string("apellidos")->after("nombre");
-            $table->string("matricula")->after("apellidos");
+            $table->string("matricula")->after("apellidos")->nullable();
+            $table->string('correo')->unique()->change();
         });
     }
 

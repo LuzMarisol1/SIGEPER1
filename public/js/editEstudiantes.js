@@ -25,7 +25,10 @@ $(document).ready(function() {
         },
         buttons: [{
             extend: 'excel',
-            text: '<i class="fas fa-file-excel" style="font-size: 1.5rem; color: green;"></i> <span style="color: #333333;">Reporte</span>'
+            text: '<i class="fas fa-file-excel" style="font-size: 1.5rem; color: green;"></i> <span style="color: #333333;">Reporte</span>',
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5]
+            }
         }],
         paging: true,
         pageLength: 10,

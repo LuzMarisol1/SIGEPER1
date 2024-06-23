@@ -30,18 +30,18 @@ class AuthController extends Controller {
         } else {
             return redirect()->intended('/');
         }*/
-        //verificar si el usuario tiene matricula 
+        //verificar si el usuario tiene matricula
          if($user->matricula){
                 return redirect()->route('informacion.estudiante');
         }
-            
-        if(Auth::user()->hasRole('Coordinador') || Auth::user()->hasRole('admin')){
+
+        if(Auth::user()->hasRole('Coordinador') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('Maestro')){
             return redirect()->route('InfEstudiantes');
         }else{
             return redirect()->intended('/');
         }
     }
-        
+
 
         return back()->withErrors([
             'correo' => 'Las credenciales no coinciden con nuestros registros.',

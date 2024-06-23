@@ -1,5 +1,5 @@
-<div class="modal fade" id="subirDocumentosModal{{ $estudiante->matricula }}" tabindex="-1" aria-labelledby="subirDocumentosLabel" aria-hidden="true">  
-    
+<div class="modal fade" id="subirDocumentosModal{{ $estudiante->matricula }}" tabindex="-1" aria-labelledby="subirDocumentosLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,9 +7,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             
-                <form id="formEditar" method="POST" action="{{ route('actualizarInfo') }}">
+
+                <form id="formEditar" method="POST" action="{{ route('uploadDocuments') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $estudiante->id }}">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
@@ -35,13 +36,13 @@
                             <div class="mb-3">
                                 <label for="tituloProyecto" class="campoTitulo">CARDEX</label>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-4">
                             @for ($i = 1; $i <= 5; $i++)
                                 <div class="mb-3">
                                     <input type="file" class="form-control" id="documento{{ $i }}"
-                                        name="documento{{ $i }}">
+                                        name="documento_{{ $i }}">
                                 </div>
                             @endfor
                         </div>
@@ -57,12 +58,13 @@
                             @endfor
                         </div>
                     </div>
+                    <div id="botonesEdit" class="modal-footer">
+                        <button id="guardarDatos" type="submit" class="btn btn-primary btn-guardar-datos">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
                 </form>
             </div>
-            <div id="botonesEdit" class="modal-footer">
-                <button id="guardarDatos" type="button" class="btn btn-primary btn-guardar-datos">Guardar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            </div>
+
         </div>
     </div>
 </div>

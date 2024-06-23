@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\DocumentosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
@@ -23,10 +25,10 @@ use App\Http\Controllers\UsuarioERController;
 });*/
 
 Route::get('/', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->middleware('auth')->name('home');
-Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
+Route::get('/InfEstudiantes', 'App\Http\Controllers\HomeController@viewTablaEstudiantes')->middleware('auth')->name('InfEstudiantes');
 Route::get('/actualizarInfo', 'App\Http\Controllers\HomeController@viewTablaEstudiantes');
 
-//Registro estudiante 
+//Registro estudiante
 Route::post('/registro', [UsuarioController::class, 'registro']);
 
 //estudiante
@@ -66,3 +68,13 @@ Route::get('/downloadDocument/{id}', [UsuarioERController::class, 'downloadDocum
 Route::get('/informacion-estudiante', [UsuarioERController::class, 'informacionAlumnos'])
     ->middleware(['auth', 'check.matricula'])
     ->name('informacion.estudiante');
+
+Route::get('/documentos-proyecto/{id_proyecto}', [DocumentosController::class, 'projectDocuments'])
+    ->middleware(['auth'])
+    ->name('documentos.proyecto');
+Route::post('/updateEstatusDocumento', [DocumentosController::class, 'updateEstatus'])
+    ->middleware(['auth'])
+    ->name('updateEstatusDocumento');
+
+Route::post('crearComentario', [ComentarioController::class, 'store'])->name('crearComentario')->middleware('auth');
+Route::get('comentariosDocumento/{id_documento}', [ComentarioController::class, 'index'])->name('comentariosDocumento')->middleware('auth');
