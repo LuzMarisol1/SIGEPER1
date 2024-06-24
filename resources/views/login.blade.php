@@ -50,9 +50,6 @@
                         <div class="input-group">
                             <input type="password" name="password" id="password" class="form-control" required>
                             <div class="input-group-append">
-                                <span class="input-group-text password-toggle">
-                                    <i class="fa fa-eye"></i>
-                                </span>
                             </div>
                         </div>
                     </div>
