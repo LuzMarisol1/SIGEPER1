@@ -117,7 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
         validarFormularioRegistro();
     });
 
-    // Evento click para el botón de registro
+    function limpiarFormularioRegistro() {
+        $('#registroForm')[0].reset();
+        limpiarErrores();
+    }
     $('#btnRegistro').on('click', function(e) {
         e.preventDefault();
         limpiarErrores();
@@ -125,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let formData = new FormData($('#registroForm')[0]);
             let correo = $('#correoRegistro').val().replace('@estudiantes.uv.mx', '');
             formData.set('correo', correo);
-
             $.ajax({
                 url: '/registro',
                 method: 'POST',
@@ -138,15 +140,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 success: function(response) {
                     console.log('Respuesta de éxito:', response);
                     if (response.success) {
+                        // Cerrar el modal inmediatamente
+                        $('#modalRegistro').modal('hide');
+                        $('.modal-backdrop').remove();
+                        // Mostrar el mensaje de éxito después de cerrar el modal
+                        limpiarFormularioRegistro();
                         Swal.fire({
                             icon: 'success',
                             title: '¡Éxito!',
                             text: 'Usuario registrado exitosamente',
                             confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $('#modalRegistro').modal('hide');
-                            }
                         });
                     } else {
                         if (response.errors) {
@@ -192,4 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+});
+
+$('#modalRegistro').on('hidden.bs.modal', function() {
+    limpiarFormularioRegistro();
 });
