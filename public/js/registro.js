@@ -25,13 +25,70 @@ document.addEventListener('DOMContentLoaded', function() {
         const correoValue = $('#correoRegistro').val().trim();
         const correoPattern = /^zs\d{1,8}$/;
         if (!correoPattern.test(correoValue)) {
-            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
+            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de 8 números');
             return false;
         } else {
             ocultarError('#correoRegistro');
             return true;
         }
     }
+
+    function validarNombre() {
+        const nombreValidacion = $('#nombre').val().trim();
+        const nombreValidado = /^(?!.*([a-zA-ZáéíóúÁÉÍÓÚñÑ])\1{15})[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,60}$/;
+
+        if (!nombreValidado.test(nombreValidacion)) {
+            mostrarError('#nombre', 'El nombre solo puede contener letras, cada letra se puede repetir un máximo de 15 veces, y debe tener entre 1 y 60 caracteres');
+            return false;
+        } else {
+            ocultarError('#nombre');
+            $('#nombre').val(nombreValidacion);
+            return true;
+        }
+    }
+
+    $('#nombre').on('paste', function(e) {
+        e.preventDefault();
+        mostrarError('#nombre', 'No se permite pegar texto en este campo');
+    });
+    $('#apellidos').on('paste', function(e) {
+        e.preventDefault();
+        mostrarError('#apellidos', 'No se permite pegar texto en este campo');
+    });
+
+    function validarApellido() {
+        const apellidoValidacion = $('#apellidos').val().trim();
+        const apellidoValidado = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,60}$/;
+
+        if (!apellidoValidado.test(apellidoValidacion)) {
+            mostrarError('#nombre', 'El nombre solo puede contener letras y no debe exceder los 60 caracteres');
+            return false;
+        } else {
+            ocultarError('#nombre');
+            $('#nombre').val(apellidoValidacion);
+            return true;
+        }
+    }
+
+    function validarMatricula() {
+        let matriculaValidacion = $('#matricula').val().trim();
+
+        // Agregar "zs" al inicio si no está presente
+        if (!matriculaValidacion.startsWith("zs")) {
+            matriculaValidacion = "zs" + matriculaValidacion;
+            $('#matricula').val(matriculaValidacion);
+        }
+
+        const matriculaValidada = /^zs\d{1,8}$/;
+        if (!matriculaValidada.test(matriculaValidacion)) {
+            mostrarError('#matricula', 'La matrícula debe comenzar con "zs" seguido de hasta 8 números');
+            return false;
+        } else {
+            ocultarError('#matricula');
+            return true;
+        }
+    }
+
 
     function validarFormularioRegistro() {
         console.log("Validando formulario");
@@ -54,7 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validarCorreoRegistro()) {
             isValid = false;
         }
-
+        if (!validarMatricula()) {
+            isValid = false;
+        }
+        if (!validarNombre()) {
+            isValid = false;
+        }
+        if (!validarApellido()) {
+            isValid = false;
+        }
         if ($('#contrasena').val().length < 8) {
             mostrarError('#contrasena', 'La contraseña debe tener al menos 8 caracteres');
             isValid = false;
@@ -122,7 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
         limpiarErrores();
     }
     $('#btnRegistro').on('click', function(e) {
+
         e.preventDefault();
+
         limpiarErrores();
         if (validarFormularioRegistro()) {
             let formData = new FormData($('#registroForm')[0]);
@@ -142,15 +209,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (response.success) {
                         // Cerrar el modal inmediatamente
                         $('#modalRegistro').modal('hide');
-                        $('.modal-backdrop').remove();
-                        // Mostrar el mensaje de éxito después de cerrar el modal
-                        limpiarFormularioRegistro();
                         Swal.fire({
                             icon: 'success',
                             title: '¡Éxito!',
                             text: 'Usuario registrado exitosamente',
                             confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
+
+                                // Limpiar el formulario de registro
+                                limpiarFormularioRegistro();
+                            }
                         });
+
                     } else {
                         if (response.errors) {
                             for (let field in response.errors) {
