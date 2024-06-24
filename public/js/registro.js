@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const correoValue = $('#correoRegistro').val().trim();
         const correoPattern = /^zs\d{1,8}$/;
         if (!correoPattern.test(correoValue)) {
-            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de 8 números');
+            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
             return false;
         } else {
             ocultarError('#correoRegistro');
@@ -33,16 +33,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function validarNombre() {
-        const nombreValidacion = $('#nombre').val().trim();
-        const nombreValidado = /^(?!.*([a-zA-ZáéíóúÁÉÍÓÚñÑ])\1{15})[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,60}$/;
+    function validarMatricula() {
+        let matriculaValidacion = $('#matricula').val().trim();
 
-        if (!nombreValidado.test(nombreValidacion)) {
-            mostrarError('#nombre', 'El nombre solo puede contener letras, cada letra se puede repetir un máximo de 15 veces, y debe tener entre 1 y 60 caracteres');
+        // Agregar "zs" al inicio si no está presente
+        if (!matriculaValidacion.startsWith("zs")) {
+            matriculaValidacion = "zs" + matriculaValidacion;
+            $('#matricula').val(matriculaValidacion);
+        }
+    
+
+        const matriculaValidada = /^zs\d{1,8}$/;
+        if (!matriculaValidada.test(matriculaValidacion)) {
+            mostrarError('#matricula', 'La matrícula debe comenzar con "zs" seguido de hasta 8 números');
             return false;
         } else {
-            ocultarError('#nombre');
-            $('#nombre').val(nombreValidacion);
+            ocultarError('#matricula');
             return true;
         }
     }
@@ -56,39 +62,22 @@ document.addEventListener('DOMContentLoaded', function() {
         mostrarError('#apellidos', 'No se permite pegar texto en este campo');
     });
 
-    function validarApellido() {
-        const apellidoValidacion = $('#apellidos').val().trim();
-        const apellidoValidado = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]{1,60}$/;
+    $('#matricula').on('input', function() {
+        let value = $(this).val();
 
-        if (!apellidoValidado.test(apellidoValidacion)) {
-            mostrarError('#nombre', 'El nombre solo puede contener letras y no debe exceder los 60 caracteres');
-            return false;
-        } else {
-            ocultarError('#nombre');
-            $('#nombre').val(apellidoValidacion);
-            return true;
-        }
-    }
-
-    function validarMatricula() {
-        let matriculaValidacion = $('#matricula').val().trim();
-
-        // Agregar "zs" al inicio si no está presente
-        if (!matriculaValidacion.startsWith("zs")) {
-            matriculaValidacion = "zs" + matriculaValidacion;
-            $('#matricula').val(matriculaValidacion);
+        // Asegurar que comience con "zs"
+        if (value.length < 2) {
+            value = 'zs';
+        } else if (value.substring(0, 2) !== 'zs') {
+            value = 'zs' + value.substring(2);
         }
 
-        const matriculaValidada = /^zs\d{1,8}$/;
-        if (!matriculaValidada.test(matriculaValidacion)) {
-            mostrarError('#matricula', 'La matrícula debe comenzar con "zs" seguido de hasta 8 números');
-            return false;
-        } else {
-            ocultarError('#matricula');
-            return true;
-        }
-    }
+        // Limitar a 10 caracteres y solo números después de "zs"
+        value = 'zs' + value.substring(2).replace(/[^\d]/g, '').substring(0, 8);
 
+        $(this).val(value);
+        validarFormularioRegistro();
+    });
 
     function validarFormularioRegistro() {
         console.log("Validando formulario");
@@ -111,15 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validarCorreoRegistro()) {
             isValid = false;
         }
-        if (!validarMatricula()) {
-            isValid = false;
-        }
-        if (!validarNombre()) {
-            isValid = false;
-        }
-        if (!validarApellido()) {
-            isValid = false;
-        }
+
+        
+
         if ($('#contrasena').val().length < 8) {
             mostrarError('#contrasena', 'La contraseña debe tener al menos 8 caracteres');
             isValid = false;
@@ -164,7 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.is-invalid').removeClass('is-invalid');
         $('.invalid-feedback').text('');
     }
-
+    if (!validarMatricula()) {
+            isValid = false;
+    }
     $('#correoRegistro').on('input', function() {
         let value = $(this).val();
 
@@ -216,6 +201,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             confirmButtonText: 'OK'
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                // El usuario ha confirmado el mensaje de éxito
+
+                                // Eliminar la clase 'modal-open' del body y el elemento 'modal-backdrop'
                                 $('body').removeClass('modal-open');
                                 $('.modal-backdrop').remove();
 
