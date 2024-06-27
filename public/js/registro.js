@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const correoPattern = /^zs\d{1,8}$/;
         if (!correoPattern.test(correoValue)) {
             mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
+            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
             return false;
         } else {
             ocultarError('#correoRegistro');
@@ -172,9 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         limpiarErrores();
     }
     $('#btnRegistro').on('click', function(e) {
-
         e.preventDefault();
-
         limpiarErrores();
         if (validarFormularioRegistro()) {
             let formData = new FormData($('#registroForm')[0]);
@@ -194,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (response.success) {
                         // Cerrar el modal inmediatamente
                         $('#modalRegistro').modal('hide');
+                        $('.modal-backdrop').remove();
+                        // Mostrar el mensaje de éxito después de cerrar el modal
+                        limpiarFormularioRegistro();
                         Swal.fire({
                             icon: 'success',
                             title: '¡Éxito!',
@@ -211,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 limpiarFormularioRegistro();
                             }
                         });
-
                     } else {
                         if (response.errors) {
                             for (let field in response.errors) {
