@@ -162,11 +162,14 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+'custom' => [
+    'matricula' => [
+        'unique' => 'La matrícula ingresada ya ha sido registrada.',
     ],
+    'correo' => [
+        'email' => 'El correo electrónico debe tener un formato válido.',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------

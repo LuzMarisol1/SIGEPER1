@@ -1,10 +1,79 @@
-document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function() {
     console.log("Script de registro cargado");
 
     const togglePassword = document.querySelector("#togglePassword");
     const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword");
     const password = document.querySelector("#contrasena");
     const confirmPassword = document.querySelector("#contrasena_confirmation");
+    const maxLetras = 60; // Límite máximo de letras permitidas
+
+    //Limpir el modal
+    $('#modalRegistro').on('show.bs.modal', function() {
+        // Limpiar los valores de los campos del formulario
+        $('#registroForm')[0].reset();
+
+        // Limpiar los mensajes de error y estados de validación
+        $('.is-invalid').removeClass('is-invalid');
+        $('.invalid-feedback').text('');
+
+        // Restablecer el valor inicial del campo de matrícula
+        $('#matricula').val('zs');
+    });
+
+    //Evitar ingreso de números o caracteres especiales
+
+    $('#modalRegistro').on('input', '#nombre', function() {
+        var nombre = $(this).val();
+        nombre = nombre.replace(/[^a-zA-Z\s]/g, '');
+        $(this).val(nombre);
+    });
+    $('#modalRegistro').on('input', '#apellidos', function() {
+        var apellidos = $(this).val();
+        apellidos = apellidos.replace(/[^a-zA-Z\s]/g, '');
+        $(this).val(apellidos);
+    });
+
+    //Validar campo matricula comienze con zsy le sigan 8 numeros 
+    $('#modalRegistro').on('input', '#matricula', function() {
+        let value = $(this).val();
+
+        // Asegurar que comience con "zs"
+        if (value.length < 2) {
+            value = 'zs';
+        } else if (value.substring(0, 2) !== 'zs') {
+            value = 'zs' + value.substring(2);
+        }
+        // Limitar a 10 caracteres y solo números después de "zs"
+        value = 'zs' + value.substring(2).replace(/[^\d]/g, '').substring(0, 8);
+
+        $(this).val(value);
+    });
+
+    //Limitar el número de palabras
+    $('#modalRegistro').on('input', '#nombre', function() {
+        let nombre = $(this).val();
+        nombre = nombre.replace(/[^a-zA-Z\s]/g, '');
+
+        if (nombre.length > maxLetras) {
+            nombre = nombre.slice(0, maxLetras);
+            toastr.warning('Se ha alcanzado el límite máximo de letras permitidas en el nombre');
+        }
+
+        $(this).val(nombre);
+    });
+
+    //Limitar el número de palabras
+    $('#modalRegistro').on('input', '#apellidos', function() {
+        let apellido = $(this).val();
+        apellido = apellido.replace(/[^a-zA-Z\s]/g, '');
+
+        if (apellido.length > maxLetras) {
+            apellido = apellido.slice(0, maxLetras);
+            toastr.warning('Se ha alcanzado el límite máximo de letras permitidas en el nombre');
+        }
+
+        $(this).val(apellido);
+    });
 
     togglePassword.addEventListener("click", function() {
         togglePasswordVisibility(password, this);
@@ -13,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleConfirmPassword.addEventListener("click", function() {
         togglePasswordVisibility(confirmPassword, this);
     });
+
 
     function togglePasswordVisibility(input, icon) {
         const type = input.getAttribute("type") === "password" ? "text" : "password";
@@ -189,7 +259,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log('Respuesta de éxito:', response);
                     if (response.success) {
                         // Cerrar el modal inmediatamente
                         $('#modalRegistro').modal('hide');
@@ -215,9 +284,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     } else {
                         if (response.errors) {
-                            for (let field in response.errors) {
-                                mostrarError('#' + field, response.errors[field][0]);
-                            }
+                            $('.invalid-feedback').text('');
+                            // Recorrer los errores y mostrarlos en los campos correspondientes
+                            $.each(response.errors, function(field, errors) {
+                                var mensajeError = errors[0];
+                                $('#' + field).addClass('is-invalid');
+                                $('#' + field + '_error').text(errorMessage);
+                            });
                         } else {
                             Swal.fire({
                                 icon: 'error',
