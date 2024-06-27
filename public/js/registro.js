@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    console.log("Script de registro cargado");
+    // console.log("Script de registro cargado");
 
     const togglePassword = document.querySelector("#togglePassword");
     const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword");
@@ -96,7 +96,6 @@ $(document).ready(function() {
         const correoPattern = /^zs\d{1,8}$/;
         if (!correoPattern.test(correoValue)) {
             mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
-            mostrarError('#correoRegistro', 'El correo debe comenzar con "zs" seguido de hasta 8 números');
             return false;
         } else {
             ocultarError('#correoRegistro');
@@ -112,7 +111,7 @@ $(document).ready(function() {
             matriculaValidacion = "zs" + matriculaValidacion;
             $('#matricula').val(matriculaValidacion);
         }
-    
+
 
         const matriculaValidada = /^zs\d{1,8}$/;
         if (!matriculaValidada.test(matriculaValidacion)) {
@@ -151,7 +150,7 @@ $(document).ready(function() {
     });
 
     function validarFormularioRegistro() {
-        console.log("Validando formulario");
+        //console.log("Validando formulario");
         let isValid = true;
 
         if ($('#nombre').val().trim() === '') {
@@ -171,8 +170,6 @@ $(document).ready(function() {
         if (!validarCorreoRegistro()) {
             isValid = false;
         }
-
-        
 
         if ($('#contrasena').val().length < 8) {
             mostrarError('#contrasena', 'La contraseña debe tener al menos 8 caracteres');
@@ -194,8 +191,7 @@ $(document).ready(function() {
         } else {
             ocultarError('#matricula');
         }
-
-        console.log("Formulario válido:", isValid);
+        //  console.log("Formulario válido:", isValid);
         return isValid;
     }
 
@@ -219,7 +215,7 @@ $(document).ready(function() {
         $('.invalid-feedback').text('');
     }
     if (!validarMatricula()) {
-            isValid = false;
+        isValid = false;
     }
     $('#correoRegistro').on('input', function() {
         let value = $(this).val();
@@ -301,12 +297,12 @@ $(document).ready(function() {
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    console.log('Respuesta de error completa:', xhr.responseText);
-                    console.log('Estado de la respuesta:', xhr.status);
+                    //console.error("Error en la solicitud AJAX:", status, error);
+                    //console.log('Respuesta de error completa:', xhr.responseText);
+                    //console.log('Estado de la respuesta:', xhr.status);
                     try {
                         let errorResponse = JSON.parse(xhr.responseText);
-                        console.log('Errores detallados:', errorResponse.errors);
+                        //console.log('Errores detallados:', errorResponse.errors);
                         if (xhr.status === 422) {
                             for (let field in errorResponse.errors) {
                                 mostrarError('#' + field, errorResponse.errors[field][0]);
@@ -319,7 +315,7 @@ $(document).ready(function() {
                             });
                         }
                     } catch (e) {
-                        console.error('Error al parsear la respuesta:', e);
+                        //console.error('Error al parsear la respuesta:', e);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
