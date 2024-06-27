@@ -13,7 +13,7 @@ $(document).ready(function() {
     });
 
     // Agregar "zs" por defecto al campo "matricula"
-    $('#matricula').val('zs');
+    // $('#matricula').val('zs');
 
     $('#matricula').on('input', function() {
         var matricula = $(this).val();
@@ -21,11 +21,11 @@ $(document).ready(function() {
         // Eliminar cualquier carácter que no sea "z", "s" o un número
         matricula = matricula.replace(/[^zs0-9]/g, '');
         // Verificar si la matrícula comienza con "zs"
-        if (matricula.indexOf('zs') !== 0) {
-            matricula = 'zs' + matricula.slice(2);
-        }
+        // if (matricula.indexOf('zs') !== 0) {
+        //     matricula = 'zs' + matricula.slice(2);
+        // }
         // Limitar la matrícula a "zs" seguido de 8 números
-        matricula = 'zs' + matricula.slice(2, 10);
+        // matricula = 'zs' + matricula.slice(2, 10);
         $(this).val(matricula);
     });
     $('#email').on('blur', function() {
