@@ -23,9 +23,11 @@ class ComentarioController extends Controller
         if (!$documento) {
             return redirect()->route('home')->with('error', 'No se encontró el documento');
         }
+        
         $comentarios = $documento->comentarios->sortByDesc('created_at');
         $proyecto = $documento->usuarioER;
         return view('comentariosDocumento', compact('comentarios', 'documento', 'proyecto'));
+        
     }
 
     /**
@@ -47,10 +49,23 @@ class ComentarioController extends Controller
     public function store(StoreComentarioRequest $request)
     {
         $data = $request->validated();
+        //if (auth()->id() !== intval($data['usuario_id'])) {
+        //    return redirect()->back()->with('error', 'No tienes permiso para agregar un comentario con un usuario diferente');
+        //}
+
+
         $comentario = Comentario::create($data);
         $id_documento = $data['documento_id'];
+
+        //if ($id_documento !== $request->input('documento_id')) {
+        //    return redirect()->back()->with('error', 'El ID del documento no coincide con el documento seleccionado');
+        //}
+
         $id_usuario = $data['usuario_id'];
         $documento = Documentos::find($id_documento);
+
+        
+
         $proyecto = $documento->usuarioER;
         $usuario_proyecto = Usuario::whereRaw('? like concat("%", matricula, "%")', [$proyecto->matricula])->first();
         if ($usuario_proyecto && $usuario_proyecto->id != $id_usuario) {
@@ -67,6 +82,7 @@ class ComentarioController extends Controller
                 Mail::to($usuario->correo)->send(new NuevoComentario($comentario));
         }
         return redirect()->route('comentariosDocumento', $id_documento)->with('success', 'Comentario agregado');
+        
     }
 
     /**

@@ -60,7 +60,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-7">
                             @for ($i = 1; $i <= 12; $i++)
                                 <div class="mb-3">
                                     <input type="file" class="form-control" id="documento{{ $i }}"
@@ -68,17 +68,7 @@
                                 </div>
                             @endfor
                         </div>
-                        <div class="col-md-4">
-                            @for ($i = 1; $i <= 12; $i++)
-                                <div class="mb-3">
-                                    <select class="form-select" id="documento{{ $i }}" name="documento{{ $i }}" disabled>
-                                        <option value="Pendiente" selected>Pendiente</option>
-                                        <option value="Aprobado">Aprobado</option>
-                                        <option value="Rechazado">Rechazado</option>
-                                    </select>
-                                </div>
-                            @endfor
-                        </div>
+                        
                     </div>
                     <div id="botonesEdit" class="modal-footer">
                         <button id="guardarDatos" type="submit" class="btn btn-primary btn-guardar-datos">Guardar</button>
