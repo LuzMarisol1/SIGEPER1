@@ -23,11 +23,9 @@ class ComentarioController extends Controller
         if (!$documento) {
             return redirect()->route('home')->with('error', 'No se encontró el documento');
         }
-        
         $comentarios = $documento->comentarios->sortByDesc('created_at');
         $proyecto = $documento->usuarioER;
         return view('comentariosDocumento', compact('comentarios', 'documento', 'proyecto'));
-        
     }
 
     /**
@@ -63,9 +61,6 @@ class ComentarioController extends Controller
 
         $id_usuario = $data['usuario_id'];
         $documento = Documentos::find($id_documento);
-
-        
-
         $proyecto = $documento->usuarioER;
         $usuario_proyecto = Usuario::whereRaw('? like concat("%", matricula, "%")', [$proyecto->matricula])->first();
         if ($usuario_proyecto && $usuario_proyecto->id != $id_usuario) {
@@ -82,7 +77,6 @@ class ComentarioController extends Controller
                 Mail::to($usuario->correo)->send(new NuevoComentario($comentario));
         }
         return redirect()->route('comentariosDocumento', $id_documento)->with('success', 'Comentario agregado');
-        
     }
 
     /**
