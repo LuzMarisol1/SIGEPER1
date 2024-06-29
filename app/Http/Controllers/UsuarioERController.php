@@ -23,7 +23,7 @@ class UsuarioERController extends Controller
         public function __construct()
         {
             $this->middleware('auth');
-            $this->middleware('check.matricula');
+            //$this->middleware('check.matricula');
         }
 
         public function informacionAlumnos(Request $request)

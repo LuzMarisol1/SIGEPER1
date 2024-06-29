@@ -49,17 +49,17 @@ class ComentarioController extends Controller
     public function store(StoreComentarioRequest $request)
     {
         $data = $request->validated();
-        //if (auth()->id() !== intval($data['usuario_id'])) {
-        //    return redirect()->back()->with('error', 'No tienes permiso para agregar un comentario con un usuario diferente');
-        //}
+        if (auth()->id() !== intval($data['usuario_id'])) {
+            return redirect()->back()->with('error', 'No tienes permiso para agregar un comentario con un usuario diferente');
+        }
 
 
         $comentario = Comentario::create($data);
         $id_documento = $data['documento_id'];
 
-        //if ($id_documento !== $request->input('documento_id')) {
-        //    return redirect()->back()->with('error', 'El ID del documento no coincide con el documento seleccionado');
-        //}
+        if ($id_documento !== $request->input('documento_id')) {
+            return redirect()->back()->with('error', 'El ID del documento no coincide con el documento seleccionado');
+        }
 
         $id_usuario = $data['usuario_id'];
         $documento = Documentos::find($id_documento);
